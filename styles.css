@@ -35,9 +35,9 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
   background-image:
-    radial-gradient(circle at 12% 14%, rgba(217,70,239,.16), transparent 33%),
-    radial-gradient(circle at 85% 22%, rgba(167,139,250,.2), transparent 36%),
-    linear-gradient(135deg, rgba(109,40,217,.12), transparent 48%);
+    radial-gradient(120% 55% at 50% -10%, rgba(195,0,255,.38) 0%, transparent 58%),
+    radial-gradient(140% 70% at 50% 110%, rgba(138,43,226,.30) 0%, transparent 60%),
+    repeating-radial-gradient(140% 90% at 50% 50%, rgba(106,0,255,.18) 0 8%, transparent 8% 16%);
   color: var(--w);
   font-family: var(--fb);
   font-weight: 400;

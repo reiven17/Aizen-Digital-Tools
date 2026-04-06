@@ -35,9 +35,13 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
   background-image:
-    radial-gradient(120% 55% at 50% -10%, rgba(195,0,255,.38) 0%, transparent 58%),
-    radial-gradient(140% 70% at 50% 110%, rgba(138,43,226,.30) 0%, transparent 60%),
-    repeating-radial-gradient(140% 90% at 50% 50%, rgba(106,0,255,.18) 0 8%, transparent 8% 16%);
+    radial-gradient(150% 75% at 50% -8%, rgba(172,68,255,.36) 0%, rgba(80,0,120,.08) 38%, transparent 62%),
+    radial-gradient(140% 85% at 50% 112%, rgba(130,40,255,.26) 0%, transparent 62%),
+    repeating-radial-gradient(130% 82% at 20% 32%, rgba(188,98,255,.15) 0 2.2%, transparent 2.2% 8.8%),
+    repeating-radial-gradient(130% 82% at 82% 68%, rgba(124,46,255,.13) 0 2.4%, transparent 2.4% 9.2%),
+    linear-gradient(110deg, #000 0%, #040008 42%, #000 100%);
+  background-attachment: fixed;
+  background-size: 100% 100%, 100% 100%, 220% 160%, 220% 160%, 100% 100%;
   color: var(--w);
   font-family: var(--fb);
   font-weight: 400;
@@ -229,7 +233,7 @@ nav.scrolled {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: var(--bg);
+  background: transparent;
 }
 #heroCanvas {
   position: absolute;
@@ -387,10 +391,10 @@ nav.scrolled {
 
 /* ── SECTION SHARED ── */
 section { padding: 80px 20px; }
-#destacados { background: var(--bg2); }
-#productos  { background: var(--bg); }
-#confianza  { background: var(--bg3); }
-#comunidad  { background: var(--bg); position: relative; overflow: hidden; }
+#destacados { background: transparent; }
+#productos  { background: transparent; }
+#confianza  { background: transparent; }
+#comunidad  { background: transparent; position: relative; overflow: hidden; }
 
 .sec-header { text-align: center; margin-bottom: 48px; }
 .sec-eye {
@@ -1135,7 +1139,7 @@ section { padding: 80px 20px; }
 
 /* ── FOOTER ── */
 footer {
-  background: var(--bg);
+  background: transparent;
   padding: 48px 20px 0;
   border-top: 1px solid rgba(255,255,255,.06);
 }

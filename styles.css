@@ -87,8 +87,8 @@ button { cursor: pointer; border: none; background: none; }
   object-fit: contain;
   height: auto;
   background: #000000;
-  box-shadow: none !important;
-  filter: none !important;
+  box-shadow: none;
+  filter: none;
 }
 .ld-txt {
   display: flex;

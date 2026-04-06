@@ -219,7 +219,13 @@ function initSideMenu() {
     toggle.focus();
   }
 
-  toggle.addEventListener('click', openMenu);
+  toggle.addEventListener('click', () => {
+    if (menu.classList.contains('open')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
   close.addEventListener('click', closeMenu);
   overlay.addEventListener('click', closeMenu);
 

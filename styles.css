@@ -76,9 +76,20 @@ button { cursor: pointer; border: none; background: none; }
   flex-direction: column;
   align-items: center;
   animation: ldPulse 2s ease-in-out infinite;
+  background: #000000;
+  border-radius: 0;
+  box-shadow: none;
   filter: none;
 }
-.ld-logo img { width: min(520px, 92vw); max-height: min(52vw, 300px); object-fit: contain; height: auto; }
+.ld-logo img {
+  width: min(520px, 92vw);
+  max-height: min(52vw, 300px);
+  object-fit: contain;
+  height: auto;
+  background: #000000;
+  box-shadow: none !important;
+  filter: none !important;
+}
 .ld-txt {
   display: flex;
   flex-direction: column;
@@ -118,18 +129,18 @@ button { cursor: pointer; border: none; background: none; }
   height: 100%;
   width: 0%;
   border-radius: 99px;
-  background: linear-gradient(90deg, #6d28d9, #c084fc, #7e22ce);
+  background: linear-gradient(90deg, #6a00ff, #9a00ff, #c300ff);
   background-size: 300% 100%;
   animation: shimBar 1.5s linear infinite;
-  box-shadow: 0 0 14px rgba(192,132,252,.95), 0 0 28px rgba(109,40,217,.7);
+  box-shadow: 0 0 14px rgba(154,0,255,.95), 0 0 30px rgba(106,0,255,.85);
   transition: width .04s linear;
 }
 .ld-pct {
   font-family: var(--fd);
   font-size: 1.45rem;
   font-weight: 600;
-  color: #c084fc;
-  text-shadow: 0 0 8px rgba(192,132,252,.95), 0 0 18px rgba(109,40,217,.75);
+  color: #b000ff;
+  text-shadow: 0 0 8px rgba(176,0,255,.95), 0 0 20px rgba(106,0,255,.8);
   letter-spacing: .15em;
 }
 
@@ -462,6 +473,7 @@ section { padding: 80px 20px; }
   position: relative;
   overflow: hidden;
   transition: transform .25s var(--es), box-shadow .25s var(--es), border-color .25s ease, opacity .2s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 .fc::before {
   content: '';
@@ -490,7 +502,7 @@ section { padding: 80px 20px; }
 .fc:hover:not(.active) { opacity: .9; transform: scale(.985); }
 
 .fc-logo {
-  width: 80px; height: 80px;
+  width: 108px; height: 108px;
   border-radius: 18px;
   background: rgba(255,255,255,.05);
   border: 1px solid rgba(255,255,255,.08);
@@ -501,7 +513,7 @@ section { padding: 80px 20px; }
   margin-top: 8px;
   flex-shrink: 0;
 }
-.fc-logo img { width: 64px; height: 64px; object-fit: contain; }
+.fc-logo img { width: 88px; height: 88px; object-fit: contain; }
 .fc-logo-fb {
   font-family: var(--fd);
   font-size: 1.8rem;
@@ -538,6 +550,7 @@ section { padding: 80px 20px; }
   letter-spacing: .05em;
   text-transform: uppercase;
   transition: all .2s;
+  -webkit-tap-highlight-color: transparent;
 }
 .fc-cta:hover {
   background: #f2f2f2;
@@ -562,6 +575,7 @@ section { padding: 80px 20px; }
   z-index: 10;
   transition: all .2s;
   backdrop-filter: blur(10px);
+  -webkit-tap-highlight-color: transparent;
 }
 .car-btn:hover {
   background: rgba(255,255,255,.1);
@@ -584,6 +598,7 @@ section { padding: 80px 20px; }
   transition: all .3s;
   cursor: pointer;
   border: none;
+  -webkit-tap-highlight-color: transparent;
 }
 .car-dot.active {
   width: 20px;
@@ -681,6 +696,7 @@ section { padding: 80px 20px; }
   overflow: hidden;
   animation: cardIn .4s var(--es) both;
   transition: transform .3s var(--es), border-color .3s, box-shadow .3s;
+  -webkit-tap-highlight-color: transparent;
 }
 .pc::before {
   content: '';
@@ -695,7 +711,7 @@ section { padding: 80px 20px; }
   box-shadow: 0 8px 32px rgba(0,0,0,.4), 0 0 18px rgba(180,78,248,.42);
 }
 .pc-logo {
-  width: 56px; height: 56px;
+  width: 76px; height: 76px;
   border-radius: 14px;
   background: rgba(255,255,255,.04);
   border: 1px solid rgba(255,255,255,.07);
@@ -705,7 +721,7 @@ section { padding: 80px 20px; }
   overflow: hidden;
   flex-shrink: 0;
 }
-.pc-logo img { width: 44px; height: 44px; object-fit: contain; }
+.pc-logo img { width: 60px; height: 60px; object-fit: contain; }
 .pc-logo-fb {
   font-family: var(--fd);
   font-size: 1.2rem;
@@ -736,6 +752,7 @@ section { padding: 80px 20px; }
   letter-spacing: .06em;
   text-transform: uppercase;
   transition: all .2s;
+  -webkit-tap-highlight-color: transparent;
 }
 .pc-btn:hover {
   background: #ffffff;
@@ -1228,4 +1245,26 @@ footer {
     animation-duration: .01ms !important;
     transition-duration: .01ms !important;
   }
+}
+
+.fc:active,
+.fc:focus,
+.fc:focus-visible,
+.pc:active,
+.pc:focus,
+.pc:focus-visible,
+.fc-cta:active,
+.fc-cta:focus,
+.fc-cta:focus-visible,
+.pc-btn:active,
+.pc-btn:focus,
+.pc-btn:focus-visible,
+.car-btn:active,
+.car-btn:focus,
+.car-btn:focus-visible,
+.car-dot:active,
+.car-dot:focus,
+.car-dot:focus-visible {
+  outline: none;
+  box-shadow: none !important;
 }

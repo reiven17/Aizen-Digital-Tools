@@ -15,15 +15,15 @@ const PRODUCTS = [
       { type:'Cuenta Compartida', dur:'1 Mes', usd:10,  pen:pen(10)  },
       { type:'Cuenta Privada',    dur:'1 Mes', usd:45,  pen:pen(45)  }
     ],
-    desc:'Incluye IA avanzada, 5TB de almacenamiento, NotebookLM Pro y herramientas premium para estudio, trabajo y creación de contenido.' },
+    desc:'Enfocado en creación con IA: video con Veo 3.1, generación de imágenes y asistencia multimodal para producir contenido más rápido.' },
 
   { id:'supergrok',            name:'SuperGrok',                cat:'ia',           feat:true,  tag:'TOP',       stars:5, img:'assets/productos/grok.png',
     dur:'1 Mes',    usd:7,    pen:pen(7),
-    desc:'IA conectada a información en tiempo real con modo de investigación, análisis rápido y asistencia para tareas técnicas y de contenido.' },
+    desc:'IA con acceso a información en tiempo real para investigar tendencias, responder rápido y apoyar creación de contenido diario.' },
 
   { id:'supergrok-heavy',      name:'SuperGrok Heavy',          cat:'ia',           feat:false, tag:'HEAVY',     stars:5, img:'assets/productos/grok-heavy.png',
     dur:'1 Mes',    usd:23,   pen:pen(23),
-    desc:'La versión más potente de Grok. Mayor contexto, razonamiento extendido y análisis sin restricciones.' },
+    desc:'Versión más potente para trabajos largos, investigación profunda y generación de contenido con mayor contexto.' },
 
   { id:'capcut-pro',           name:'CapCut Pro',               cat:'edicion',      feat:false, tag:'POPULAR',   stars:5, img:'assets/productos/capcut.png',
     dur:'1 Mes',    usd:3.5,  pen:pen(3.5),
@@ -31,11 +31,11 @@ const PRODUCTS = [
 
   { id:'chatgpt-plus',         name:'ChatGPT Plus',             cat:'ia',           feat:false, tag:null,        stars:5, img:'assets/productos/chatgpt.png',
     dur:'1 Mes',    usd:7,    pen:pen(7),
-    desc:'GPT-4o, DALL·E 3, navegación web en tiempo real y plugins avanzados. El estándar de la IA conversacional.' },
+    desc:'Ideal para texto, ideas, imágenes y apoyo diario con herramientas premium de IA conversacional.' },
 
   { id:'chatgpt-business',     name:'ChatGPT Business',         cat:'ia',           feat:false, tag:'BUSINESS',  stars:5, img:'assets/productos/chatgpt-business.png',
     dur:'1 Mes',    usd:7,    pen:pen(7),
-    desc:'Versión empresarial de ChatGPT. Tus conversaciones no entrenan modelos de OpenAI. Máxima privacidad.' },
+    desc:'Plan para equipos con entorno más privado y mejor organización para trabajar contenido y tareas internas.' },
 
   { id:'adobe-pro-plus',       name:'Adobe Pro Plus',           cat:'edicion',      feat:false, tag:null,        stars:5, img:'assets/productos/adobe.png',
     multi:true,
@@ -44,24 +44,24 @@ const PRODUCTS = [
       { type:'3 Meses', dur:'3 Meses', usd:24, pen:pen(24) },
       { type:'6 Meses', dur:'6 Meses', usd:39, pen:pen(39) }
     ],
-    desc:'Suite Adobe completa: Photoshop, Premiere Pro, After Effects, Illustrator y más. Creatividad sin límites.' },
+    desc:'Suite creativa completa para diseño, edición de video, motion graphics y producción de contenido profesional.' },
 
   { id:'n8n-starter',          name:'N8n Starter',              cat:'programacion', feat:false, tag:null,        stars:5, img:'assets/productos/n8n.png',
     dur:'1 Año',    usd:49,   pen:pen(49),
-    desc:'Automatización de flujos sin código. Conecta apps, automatiza tareas y construye pipelines de IA.' },
+    desc:'Automatiza flujos conectando apps y servicios para ahorrar tiempo en tareas repetitivas de negocio y contenido.' },
 
   { id:'canva-pro',            name:'Canva Pro',                cat:'edicion',      feat:false, tag:'OFERTA',    stars:5, img:'assets/productos/canva.png',
     dur:'1 Año',    usd:8,    pen:pen(8),
-    desc:'+100M de templates, eliminación de fondos con IA, Brand Kit y colaboración en equipo.' },
+    desc:'Plantillas premium, edición rápida y herramientas de IA para crear contenido visual para redes y marcas.' },
 
   { id:'gemini-workspace',     name:'Gemini Ultra Workspace',   cat:'ia',           feat:false, tag:'WORKSPACE', stars:4, img:'assets/productos/gemini-workspace.png',
     dur:'1 Mes',    usd:15,   pen:pen(15),
-    desc:'Correo corporativo con 25,000 créditos de Gemini. Ideal para equipos y proyectos empresariales.',
+    desc:'Workspace con Gemini para trabajo colaborativo, redacción, ideas y producción de contenido en equipo.',
     warning:'Sin garantía' },
 
   { id:'gemini-pro',           name:'Gemini Pro',               cat:'ia',           feat:true,  tag:'TOP',       stars:5, img:'assets/productos/gemini-pro.png',
     dur:'18 Meses', usd:36,   pen:pen(36),
-    desc:'Ideal para productividad diaria con integración en ecosistema Google, herramientas de IA y almacenamiento amplio para uso continuo.',
+    desc:'Plan balanceado para productividad diaria, apoyo con IA y creación de contenido en el ecosistema de Google.',
     guarantee:'12 meses de garantía' },
 
   { id:'claude-pro',           name:'Claude Pro',               cat:'programacion', feat:false, tag:null,        stars:5, img:'assets/productos/claude.png',
@@ -245,8 +245,7 @@ function initCarousel() {
   const track = document.getElementById('carouselTrack');
   const dots  = document.getElementById('carDots');
   if (!track) return;
-  const SNAP_THRESHOLD = 35;
-  const SWIPE_THRESHOLD = 35;
+  const SWIPE_THRESHOLD = 32;
 
   FEATURED.forEach((p, i) => track.appendChild(buildFC(p, i)));
 
@@ -301,8 +300,13 @@ function initCarousel() {
     if (!isDown) return;
     isDown = false;
     vp.classList.remove('dragging');
-    const dragDist = Math.abs(vp.scrollLeft - startScrollLeft);
-    if (dragDist <= SNAP_THRESHOLD) goSlide(carIdx);
+    const delta = vp.scrollLeft - startScrollLeft;
+    if (Math.abs(delta) > SWIPE_THRESHOLD) {
+      goSlide(delta > 0 ? Math.min(carIdx + 1, FEATURED.length - 1) : Math.max(carIdx - 1, 0));
+      resetAuto();
+    } else {
+      goSlide(carIdx);
+    }
   };
 
   const onMouseMove = e => {
@@ -358,7 +362,7 @@ function initCarousel() {
     }
     const dx = e.changedTouches[0].clientX - tx;
     if (Math.abs(dx) > SWIPE_THRESHOLD) {
-      goSlide(dx < 0 ? (carIdx+1)%FEATURED.length : (carIdx-1+FEATURED.length)%FEATURED.length);
+      goSlide(dx < 0 ? Math.min(carIdx + 1, FEATURED.length - 1) : Math.max(carIdx - 1, 0));
       resetAuto();
     } else {
       goSlide(carIdx);

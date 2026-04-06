@@ -287,8 +287,12 @@ function initCarousel() {
   };
 
   const onMouseUp = () => {
+    if (!isDown) return;
     isDown = false;
     vp.classList.remove('dragging');
+    if (moved) {
+      setTimeout(() => { moved = false; }, 0);
+    }
   };
 
   const onMouseMove = e => {
@@ -322,6 +326,7 @@ function initCarousel() {
   window.addEventListener('mouseup', onMouseUp);
   vp.addEventListener('mouseleave', () => {
     isDown = false;
+    moved = false;
     vp.classList.remove('dragging');
   });
   vp.addEventListener('mousemove', onMouseMove);

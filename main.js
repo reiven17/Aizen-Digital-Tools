@@ -79,10 +79,27 @@ const FEATURED = PRODUCTS.filter(p => p.feat);
 function initLoader() {
   const fill = document.getElementById('loaderFill');
   const pct  = document.getElementById('loaderPct');
+  if (!fill || !pct) {
+    exitLoader();
+    return;
+  }
   const dur  = 1800;
   const start = performance.now();
+  let done = false;
+
+  function finishLoader() {
+    if (done) return;
+    done = true;
+    clearTimeout(failSafe);
+    fill.style.width = '100%';
+    pct.textContent  = '100%';
+    setTimeout(exitLoader, 200);
+  }
+
+  const failSafe = setTimeout(finishLoader, 3200);
 
   function tick(now) {
+    if (done) return;
     const t = Math.min((now - start) / dur, 1);
     // ease in-out quad
     const e = t < .5 ? 2*t*t : 1 - Math.pow(-2*t+2,2)/2;
@@ -92,9 +109,7 @@ function initLoader() {
     if (t < 1) {
       requestAnimationFrame(tick);
     } else {
-      fill.style.width = '100%';
-      pct.textContent  = '100%';
-      setTimeout(exitLoader, 200);
+      finishLoader();
     }
   }
   requestAnimationFrame(tick);

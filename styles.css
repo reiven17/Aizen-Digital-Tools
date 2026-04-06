@@ -74,7 +74,7 @@ button { cursor: pointer; border: none; background: none; }
   animation: ldPulse 2s ease-in-out infinite;
   filter: drop-shadow(0 0 30px rgba(255,255,255,.7));
 }
-.ld-logo img { width: min(520px, 92vw); aspect-ratio: 16 / 9; object-fit: contain; height: auto; }
+.ld-logo img { width: min(520px, 92vw); max-height: min(52vw, 300px); object-fit: contain; height: auto; }
 .ld-txt {
   display: flex;
   flex-direction: column;

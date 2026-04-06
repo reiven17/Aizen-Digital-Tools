@@ -335,12 +335,6 @@ function initCarousel() {
     }
   }, true);
 
-  window.addEventListener('beforeunload', () => {
-    window.removeEventListener('mouseup', onMouseUp);
-    vp.removeEventListener('mousemove', onMouseMove);
-    vp.removeEventListener('scroll', onScroll);
-  }, { once: true });
-
   startAuto();
 }
 

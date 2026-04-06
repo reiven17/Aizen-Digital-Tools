@@ -1,353 +1,238 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- ===== SEO PRIMARY ===== -->
-  <title>Aizen Digital Tools – Herramientas Digitales Premium | aizenai.tech</title>
-  <meta name="description" content="Compra herramientas digitales premium al mejor precio: Claude Pro, ChatGPT Plus, Gemini Ultra, CapCut Pro, Adobe y más. Entrega inmediata vía WhatsApp. Perú.">
-  <meta name="keywords" content="herramientas digitales Peru, claude pro precio soles, chatgpt plus barato, gemini ultra compartido, capcut pro, adobe creative cloud, supergrok, canva pro anual, n8n automatizacion, aizenai">
-  <meta name="author" content="Aizen Digital Tools">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://aizenai.tech">
-
-  <!-- ===== OPEN GRAPH ===== -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://aizenai.tech">
-  <meta property="og:title" content="Aizen Digital Tools – Herramientas Digitales Premium">
-  <meta property="og:description" content="IA, edición y automatización premium al mejor precio. Entrega inmediata vía WhatsApp.">
-  <meta property="og:image" content="https://aizenai.tech/assets/logos/og-image.png">
-  <meta property="og:locale" content="es_PE">
-
-  <!-- ===== TWITTER CARD ===== -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Aizen Digital Tools">
-  <meta name="twitter:description" content="Herramientas digitales premium. Claude, Gemini, ChatGPT y más.">
-  <meta name="twitter:image" content="https://aizenai.tech/assets/logos/og-image.png">
-
-  <!-- ===== FAVICON ===== -->
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
-  <link rel="manifest" href="assets/favicon/site.webmanifest">
-  <meta name="theme-color" content="#07070b">
-
-  <!-- ===== FONTS ===== -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="css/styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aizen Digital Tools – Herramientas Digitales Premium</title>
+<meta name="description" content="Claude Pro, ChatGPT Plus, Gemini Ultra, CapCut Pro y más. Entrega inmediata vía WhatsApp. Perú.">
+<meta name="keywords" content="herramientas digitales peru, claude pro, chatgpt plus, gemini ultra, capcut pro, canva pro, adobe, supergrok, aizenai">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://aizenai.tech">
+<meta property="og:title" content="Aizen Digital Tools – Herramientas Digitales Premium">
+<meta property="og:description" content="Herramientas digitales premium. Entrega inmediata por WhatsApp.">
+<meta property="og:url" content="https://aizenai.tech">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://aizenai.tech/assets/logos/og-image.png">
+<link rel="icon" href="assets/favicon/favicon-32.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-  <!-- ════════════════════════════
-       LOADING SCREEN
-  ════════════════════════════ -->
-  <div id="loader" aria-live="polite">
-    <div class="loader-inner">
-      <div class="loader-logo-wrap">
-        <img
-          src="assets/logos/aizen-logo.png"
-          alt="Aizen Digital Tools"
-          class="loader-logo"
-          onerror="this.outerHTML='<div class=\'loader-logo-fallback\'><span class=\'llf-a\'>AIZEN</span><span class=\'llf-s\'>DIGITAL TOOLS</span></div>'"
-        >
-        <div class="loader-glitch-overlay" aria-hidden="true"></div>
-      </div>
-      <div class="loader-bar-wrap">
-        <div class="loader-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-          <div class="loader-fill" id="loaderFill">
-            <div class="loader-glow"></div>
-          </div>
-        </div>
-        <span class="loader-percent" id="loaderPercent">0%</span>
-      </div>
+<!-- ===== LOADER ===== -->
+<div id="loader">
+  <div class="ld-logo">
+    <img src="assets/logos/aizen-logo.png" alt="Aizen Digital Tools"
+      onerror="this.style.display='none';document.getElementById('ld-txt').style.display='flex'">
+    <div id="ld-txt" class="ld-txt" style="display:none">
+      <span class="ld-a">AIZEN</span>
+      <span class="ld-s">DIGITAL TOOLS</span>
     </div>
   </div>
+  <div class="ld-bar-wrap">
+    <div class="ld-bar"><div class="ld-fill" id="loaderFill"></div></div>
+    <span class="ld-pct" id="loaderPct">0%</span>
+  </div>
+</div>
 
-  <!-- ════════════════════════════
-       MAIN APP
-  ════════════════════════════ -->
-  <div id="app">
+<!-- ===== APP ===== -->
+<div id="app">
 
-    <!-- ── NAVBAR ── -->
-    <nav id="navbar" aria-label="Navegación principal">
-      <a href="#hero" class="nav-logo-link">
-        <img
-          src="assets/logos/aizen-logo-sm.png"
-          alt="Aizen"
-          class="nav-logo"
-          onerror="this.style.display='none'; document.querySelector('.nav-logo-text').style.display='block'"
-        >
-        <span class="nav-logo-text" style="display:none">AIZEN</span>
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-brand">
+      <img src="assets/logos/aizen-logo-sm.png" alt="Aizen"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span style="display:none">AIZEN</span>
+    </a>
+    <div class="nav-links">
+      <a href="#destacados">Destacados</a>
+      <a href="#productos">Productos</a>
+      <a href="#confianza">Garantía</a>
+    </div>
+    <a href="https://wa.me/51941797198" class="nav-wa" target="_blank" rel="noopener">💬 Consultar</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <canvas id="heroCanvas"></canvas>
+    <div class="hero-inner">
+      <div class="hero-logo-wrap" data-reveal>
+        <img src="assets/logos/aizen-logo.png" alt="Aizen Digital Tools" class="hero-logo"
+          onerror="this.style.display='none';document.getElementById('hero-txt').style.display='flex'">
+        <div id="hero-txt" class="hero-txt" style="display:none">
+          <span class="ht-n">AIZEN</span>
+          <span class="ht-s">DIGITAL TOOLS</span>
+        </div>
+      </div>
+      <p class="hero-tag" data-reveal>
+        Herramientas digitales premium.<br>
+        <em>Sin complicaciones. Al mejor precio.</em>
+      </p>
+      <div class="hero-badges" data-reveal>
+        <span class="badge">✦ +50 Clientes</span>
+        <span class="badge">✦ Garantía Real</span>
+        <span class="badge">✦ Entrega Inmediata</span>
+      </div>
+      <div class="hero-cta" data-reveal>
+        <a href="#productos" class="btn-primary">Ver Productos →</a>
+        <a href="https://wa.me/51941797198" class="btn-wa" target="_blank" rel="noopener">💬 Consultar Ahora</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>scroll</span>
+      <div class="scroll-line"><div class="scroll-dot"></div></div>
+    </div>
+  </section>
+
+  <!-- DESTACADOS -->
+  <section id="destacados">
+    <div class="sec-header" data-reveal>
+      <span class="sec-eye">🔥 TOP SELLERS</span>
+      <h2 class="sec-title">Más Vendidos</h2>
+      <p class="sec-sub">Los favoritos de nuestra comunidad</p>
+    </div>
+    <div class="carousel-scene">
+      <div class="carousel-vp">
+        <div class="carousel-track" id="carouselTrack"></div>
+      </div>
+      <button class="car-btn car-prev" id="carPrev">&#8249;</button>
+      <button class="car-btn car-next" id="carNext">&#8250;</button>
+      <div class="car-dots" id="carDots"></div>
+    </div>
+  </section>
+
+  <!-- PRODUCTOS -->
+  <section id="productos">
+    <div class="sec-header" data-reveal>
+      <span class="sec-eye">CATÁLOGO COMPLETO</span>
+      <h2 class="sec-title">Todos los Productos</h2>
+    </div>
+    <div class="cat-controls" data-reveal>
+      <div class="search-wrap">
+        <span class="search-ico">⌕</span>
+        <input type="text" id="searchInput" class="search-inp"
+          placeholder="Buscar herramienta..." autocomplete="off">
+        <button class="search-clr" id="searchClr" style="display:none">×</button>
+      </div>
+      <div class="pills" id="pills">
+        <button class="pill active" data-filter="all">Todos</button>
+        <button class="pill" data-filter="ia">🤖 IA</button>
+        <button class="pill" data-filter="edicion">🎬 Edición</button>
+        <button class="pill" data-filter="programacion">⚙️ Dev</button>
+      </div>
+    </div>
+    <div class="prod-grid" id="prodGrid"></div>
+    <div class="no-res" id="noRes" style="display:none">
+      No se encontraron resultados para "<span id="noResQ"></span>"
+    </div>
+  </section>
+
+  <!-- CONFIANZA -->
+  <section id="confianza">
+    <div class="trust-inner">
+      <div class="stats-row" data-reveal>
+        <div class="stat">
+          <div class="stat-n"><span data-count="50">0</span><span class="stat-plus">+</span></div>
+          <span class="stat-l">Clientes Satisfechos</span>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat">
+          <div class="stat-n"><span>100%</span></div>
+          <span class="stat-l">Compra Garantizada</span>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat">
+          <div class="stat-n"><span>24/7</span></div>
+          <span class="stat-l">Soporte WhatsApp</span>
+        </div>
+      </div>
+      <div class="guar-row" data-reveal>
+        <div class="guar-card">
+          <span class="gc-i">🔒</span>
+          <strong>Compra Segura</strong>
+          <p>Tu dinero protegido siempre</p>
+        </div>
+        <div class="guar-card">
+          <span class="gc-i">⚡</span>
+          <strong>Entrega Inmediata</strong>
+          <p>Acceso en minutos por WhatsApp</p>
+        </div>
+        <div class="guar-card">
+          <span class="gc-i">🛡️</span>
+          <strong>Garantía Real</strong>
+          <p>Respaldo y soporte post-venta</p>
+        </div>
+      </div>
+      <div class="pays" data-reveal>
+        <p class="pays-lbl">Métodos de pago aceptados</p>
+        <div class="pays-row">
+          <div class="pay-chip"><img src="assets/icons/binance.png" alt="Binance" onerror="this.parentElement.textContent='Binance'"></div>
+          <div class="pay-chip"><img src="assets/icons/paypal.png" alt="PayPal" onerror="this.parentElement.textContent='PayPal'"></div>
+          <div class="pay-chip"><img src="assets/icons/visa.png" alt="Tarjeta" onerror="this.parentElement.textContent='Tarjeta'"></div>
+          <div class="pay-chip"><img src="assets/icons/yape.png" alt="Yape" onerror="this.parentElement.textContent='Yape'"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMUNIDAD -->
+  <section id="comunidad">
+    <div class="com-glow"></div>
+    <div class="com-inner" data-reveal>
+      <span class="com-eye">🔔</span>
+      <h2 class="com-title">Entérate primero<br>de las mejores ofertas</h2>
+      <p class="com-desc">Sorteos, descuentos exclusivos y nuevas herramientas.<br>Solo para los del grupo.</p>
+      <a href="https://chat.whatsapp.com/KBYeX08mcx21ZmS5T1DQwE?mode=gi_t"
+        class="btn-com" target="_blank" rel="noopener">
+        💬 Unirme al Grupo — Es Gratis
       </a>
-      <div class="nav-links" role="list">
-        <a href="#destacados" class="nav-link" role="listitem">Destacados</a>
-        <a href="#productos"  class="nav-link" role="listitem">Productos</a>
-        <a href="#confianza"  class="nav-link" role="listitem">Garantía</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <img src="assets/logos/aizen-logo-sm.png" alt="Aizen" class="ft-logo"
+          onerror="this.outerHTML='<span class=&quot;ft-logo-txt&quot;>AIZEN</span>'">
+        <p>Herramientas digitales premium</p>
       </div>
-      <a href="https://wa.me/51941797198" class="nav-cta" target="_blank" rel="noopener noreferrer" aria-label="Consultar por WhatsApp">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
-          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.862L.5 23.5l5.826-1.527A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.95 9.95 0 01-5.058-1.38L2.5 21.5l.917-4.283A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
-        </svg>
-        Consultar
-      </a>
-    </nav>
-
-    <!-- ── HERO ── -->
-    <section id="hero" aria-labelledby="heroHeading">
-      <canvas id="heroCanvas" aria-hidden="true"></canvas>
-      <div class="hero-content">
-        <div class="hero-logo-container" data-reveal="fade-up" data-delay="0">
-          <img
-            src="assets/logos/aizen-logo.png"
-            alt="Aizen Digital Tools"
-            class="hero-logo"
-            onerror="this.outerHTML='<div class=\'hero-logo-fallback\'><span class=\'hlf-name\'>AIZEN</span><span class=\'hlf-sub\'>DIGITAL TOOLS</span></div>'"
-          >
-        </div>
-        <p class="hero-tagline" data-reveal="fade-up" data-delay="150" id="heroHeading">
-          Herramientas digitales premium.<br>
-          <em>Sin complicaciones. Al mejor precio.</em>
-        </p>
-        <div class="hero-badges" data-reveal="fade-up" data-delay="300" aria-label="Beneficios">
-          <span class="badge">✦ +50 Clientes</span>
-          <span class="badge">✦ Garantía Real</span>
-          <span class="badge">✦ Entrega Inmediata</span>
-        </div>
-        <div class="hero-cta" data-reveal="fade-up" data-delay="450">
-          <a href="#productos" class="btn-primary">
-            Ver Productos
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-          <a href="https://wa.me/51941797198" class="btn-wa" target="_blank" rel="noopener noreferrer">
-            💬 Consultar Ahora
-          </a>
-        </div>
-      </div>
-      <div class="hero-scroll-hint" aria-hidden="true">
-        <span>scroll</span>
-        <div class="scroll-bar"><div class="scroll-dot"></div></div>
-      </div>
-    </section>
-
-    <!-- ── FEATURED / MÁS VENDIDOS ── -->
-    <section id="destacados" aria-labelledby="featuredHeading">
-      <div class="section-header" data-reveal="fade-up">
-        <span class="section-eyebrow">🔥 TOP SELLERS</span>
-        <h2 class="section-title" id="featuredHeading">Más Vendidos</h2>
-        <p class="section-sub">Los favoritos de nuestra comunidad</p>
-      </div>
-
-      <div class="carousel-scene" aria-label="Carrusel de productos destacados">
-        <div class="carousel-viewport">
-          <div class="carousel-track" id="carouselTrack" role="list"></div>
-        </div>
-        <button class="carousel-btn carousel-prev" id="carouselPrev" aria-label="Anterior">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-        <button class="carousel-btn carousel-next" id="carouselNext" aria-label="Siguiente">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-        <div class="carousel-dots" id="carouselDots" role="tablist" aria-label="Navegación del carrusel"></div>
-      </div>
-    </section>
-
-    <!-- ── CATALOG ── -->
-    <section id="productos" aria-labelledby="catalogHeading">
-      <div class="section-header" data-reveal="fade-up">
-        <span class="section-eyebrow">CATÁLOGO COMPLETO</span>
-        <h2 class="section-title" id="catalogHeading">Todos los Productos</h2>
-      </div>
-
-      <div class="catalog-controls" data-reveal="fade-up">
-        <div class="search-wrap">
-          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-          <input
-            type="text"
-            id="searchInput"
-            class="search-input"
-            placeholder="Buscar herramienta..."
-            autocomplete="off"
-            aria-label="Buscar productos"
-          >
-          <button class="search-clear" id="searchClear" aria-label="Limpiar búsqueda" style="display:none">×</button>
-        </div>
-        <div class="category-pills" id="categoryPills" role="group" aria-label="Filtrar por categoría">
-          <button class="pill active" data-filter="all">Todos</button>
-          <button class="pill" data-filter="ia">🤖 IA</button>
-          <button class="pill" data-filter="edicion">🎬 Edición</button>
-          <button class="pill" data-filter="programacion">⚙️ Dev</button>
-        </div>
-      </div>
-
-      <div class="products-grid" id="productsGrid" role="list" aria-label="Lista de productos"></div>
-
-      <div class="no-results" id="noResults" style="display:none" aria-live="polite">
-        <p>No se encontraron productos para "<span id="noResultsQuery"></span>"</p>
-      </div>
-    </section>
-
-    <!-- ── TRUST / SOCIAL PROOF ── -->
-    <section id="confianza" aria-labelledby="trustHeading">
-      <div class="trust-inner">
-        <h2 class="visually-hidden" id="trustHeading">Por qué elegirnos</h2>
-
-        <div class="stats-row" data-reveal="fade-up">
-          <div class="stat-item">
-            <div class="stat-num-wrap">
-              <span class="stat-num" data-count="50">0</span>
-              <span class="stat-plus">+</span>
-            </div>
-            <span class="stat-label">Clientes Satisfechos</span>
-          </div>
-          <div class="stat-sep" aria-hidden="true"></div>
-          <div class="stat-item">
-            <div class="stat-num-wrap">
-              <span class="stat-num">100%</span>
-            </div>
-            <span class="stat-label">Compra Garantizada</span>
-          </div>
-          <div class="stat-sep" aria-hidden="true"></div>
-          <div class="stat-item">
-            <div class="stat-num-wrap">
-              <span class="stat-num">24/7</span>
-            </div>
-            <span class="stat-label">Soporte por WhatsApp</span>
-          </div>
-        </div>
-
-        <div class="guarantees" data-reveal="fade-up">
-          <div class="guarantee-card">
-            <span class="gc-icon" aria-hidden="true">🔒</span>
-            <strong class="gc-title">Compra Segura</strong>
-            <p class="gc-desc">Tu dinero protegido en cada transacción</p>
-          </div>
-          <div class="guarantee-card">
-            <span class="gc-icon" aria-hidden="true">⚡</span>
-            <strong class="gc-title">Entrega Inmediata</strong>
-            <p class="gc-desc">Acceso en minutos vía WhatsApp</p>
-          </div>
-          <div class="guarantee-card">
-            <span class="gc-icon" aria-hidden="true">🛡️</span>
-            <strong class="gc-title">Garantía Real</strong>
-            <p class="gc-desc">Respaldo y soporte post-venta real</p>
-          </div>
-        </div>
-
-        <div class="payments" data-reveal="fade-up">
-          <p class="payments-label">Métodos de pago aceptados</p>
-          <div class="payments-row">
-            <div class="pay-chip">
-              <img src="assets/icons/binance.png" alt="Binance Pay" onerror="this.parentElement.textContent='Binance'">
-            </div>
-            <div class="pay-chip">
-              <img src="assets/icons/paypal.png" alt="PayPal" onerror="this.parentElement.textContent='PayPal'">
-            </div>
-            <div class="pay-chip">
-              <img src="assets/icons/visa.png" alt="Tarjeta" onerror="this.parentElement.textContent='Tarjeta'">
-            </div>
-            <div class="pay-chip">
-              <img src="assets/icons/yape.png" alt="Yape" onerror="this.parentElement.textContent='Yape'">
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── COMMUNITY CTA ── -->
-    <section id="comunidad" aria-labelledby="communityHeading">
-      <div class="community-glow-bg" aria-hidden="true"></div>
-      <div class="community-content" data-reveal="fade-up">
-        <span class="community-eyebrow" aria-hidden="true">🔔</span>
-        <h2 class="community-title" id="communityHeading">
-          Entérate primero<br>de las mejores ofertas
-        </h2>
-        <p class="community-desc">
-          Sorteos, descuentos exclusivos y nuevas herramientas.<br>Solo para los del grupo.
-        </p>
-        <a
-          href="https://chat.whatsapp.com/KBYeX08mcx21ZmS5T1DQwE?mode=gi_t"
-          class="btn-community"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Unirme al grupo de WhatsApp de Aizen Digital Tools"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
-            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.862L.5 23.5l5.826-1.527A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.95 9.95 0 01-5.058-1.38L2.5 21.5l.917-4.283A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
-          </svg>
-          Unirme al Grupo — Es Gratis
+      <nav class="ft-nav">
+        <a href="#destacados">Destacados</a>
+        <a href="#productos">Productos</a>
+        <a href="#confianza">Garantía</a>
+        <a href="#comunidad">Comunidad</a>
+        <a href="https://wa.me/51941797198" target="_blank">WhatsApp</a>
+      </nav>
+      <div class="ft-social">
+        <a href="#" class="soc-btn"><img src="assets/icons/tiktok.png" alt="TikTok" onerror="this.outerHTML='TT'"></a>
+        <a href="#" class="soc-btn"><img src="assets/icons/facebook.png" alt="Facebook" onerror="this.outerHTML='FB'"></a>
+        <a href="https://wa.me/51941797198" class="soc-btn" target="_blank">
+          <img src="assets/icons/whatsapp.png" alt="WhatsApp" onerror="this.outerHTML='WA'">
         </a>
       </div>
-    </section>
-
-    <!-- ── FOOTER ── -->
-    <footer id="footer">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <img
-            src="assets/logos/aizen-logo-sm.png"
-            alt="Aizen Digital Tools"
-            class="footer-logo"
-            onerror="this.outerHTML='<span class=\'footer-logo-text\'>AIZEN</span>'"
-          >
-          <p class="footer-tagline">Herramientas digitales premium</p>
-        </div>
-        <nav class="footer-nav" aria-label="Navegación del pie de página">
-          <a href="#destacados">Destacados</a>
-          <a href="#productos">Productos</a>
-          <a href="#confianza">Garantía</a>
-          <a href="#comunidad">Comunidad</a>
-          <a href="https://wa.me/51941797198" target="_blank" rel="noopener">WhatsApp</a>
-        </nav>
-        <div class="footer-social" aria-label="Redes sociales">
-          <a href="#" class="social-btn" aria-label="TikTok">
-            <img src="assets/icons/tiktok.png" alt="TikTok" onerror="this.outerHTML='TT'">
-          </a>
-          <a href="#" class="social-btn" aria-label="Facebook">
-            <img src="assets/icons/facebook.png" alt="Facebook" onerror="this.outerHTML='FB'">
-          </a>
-          <a href="https://wa.me/51941797198" class="social-btn" aria-label="WhatsApp" target="_blank" rel="noopener">
-            <img src="assets/icons/whatsapp.png" alt="WhatsApp" onerror="this.outerHTML='WA'">
-          </a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>© 2025 <strong>Aizen Digital Tools</strong> · <a href="https://aizenai.tech">aizenai.tech</a></p>
-        <p class="footer-disclaimer">Somos revendedores autorizados. Los precios pueden variar sin previo aviso.</p>
-      </div>
-    </footer>
-
-  </div><!-- /#app -->
-
-  <!-- ════════════════════════════
-       PRODUCT MODAL
-  ════════════════════════════ -->
-  <div id="productModal" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalProductName">
-    <div class="modal-backdrop" id="modalBackdrop"></div>
-    <div class="modal-sheet" id="modalSheet">
-      <button class="modal-close" id="modalClose" aria-label="Cerrar modal">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-        </svg>
-      </button>
-      <div class="modal-body" id="modalBody" role="document"></div>
     </div>
-  </div>
+    <div class="ft-bot">
+      <p>© 2025 <strong>Aizen Digital Tools</strong> · <a href="https://aizenai.tech">aizenai.tech</a></p>
+      <p class="ft-disc">Somos revendedores. Los precios pueden variar sin previo aviso.</p>
+    </div>
+  </footer>
 
-  <script src="js/main.js"></script>
+</div><!-- /#app -->
+
+<!-- MODAL -->
+<div id="modal" aria-hidden="true">
+  <div id="modalBg"></div>
+  <div id="modalSheet">
+    <button id="modalClose" aria-label="Cerrar">×</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
 </body>
-  </html>
+</html>

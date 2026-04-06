@@ -5,39 +5,39 @@ const pen = usd => Math.floor(usd * 3.4);
 const WA  = n => `https://wa.me/51941797198?text=${encodeURIComponent('Hola! Me interesa adquirir ' + n + '. ¿Me das más info?')}`;
 
 const PRODUCTS = [
-  { id:'antigravity-ultra',    name:'Antigravity Ultra',        cat:'ia',           feat:false, tag:null,        stars:5, img:'assets/products/antigravity.png',
+  { id:'antigravity-ultra',    name:'Antigravity Ultra',        cat:'programacion', feat:true,  tag:'TOP',       stars:5, img:'assets/productos/antigravity.png',
     dur:'1 Mes',    usd:25,   pen:pen(25),
-    desc:'Potencia máxima de IA: razonamiento avanzado, generación multimodal y análisis profundo sin límites.' },
+    desc:'Plataforma enfocada en programación con agentes: genera código, depura, planifica tareas técnicas y acelera entregas de desarrollo.' },
 
-  { id:'gemini-ultra',         name:'Gemini Ultra',             cat:'ia',           feat:true,  tag:'TOP',       stars:5, img:'assets/products/gemini.png',
+  { id:'gemini-ultra',         name:'Gemini Ultra',             cat:'ia',           feat:true,  tag:'TOP',       stars:5, img:'assets/productos/gemini.png',
     multi:true,
     variants:[
       { type:'Cuenta Compartida', dur:'1 Mes', usd:10,  pen:pen(10)  },
       { type:'Cuenta Privada',    dur:'1 Mes', usd:45,  pen:pen(45)  }
     ],
-    desc:'La IA más avanzada de Google: videos ilimitados con Veo 3.1, razonamiento ultra veloz y Notebooklm.' },
+    desc:'Incluye IA avanzada, 5TB de almacenamiento, NotebookLM Pro y herramientas premium para estudio, trabajo y creación de contenido.' },
 
-  { id:'supergrok',            name:'SuperGrok',                cat:'ia',           feat:true,  tag:null,        stars:5, img:'assets/products/grok.png',
+  { id:'supergrok',            name:'SuperGrok',                cat:'ia',           feat:true,  tag:'TOP',       stars:5, img:'assets/productos/grok.png',
     dur:'1 Mes',    usd:7,    pen:pen(7),
-    desc:'IA de xAI con razonamiento en tiempo real, acceso a X y capacidades multimodales avanzadas.' },
+    desc:'IA conectada a información en tiempo real con modo de investigación, análisis rápido y asistencia para tareas técnicas y de contenido.' },
 
-  { id:'supergrok-heavy',      name:'SuperGrok Heavy',          cat:'ia',           feat:false, tag:'HEAVY',     stars:5, img:'assets/products/grok-heavy.png',
+  { id:'supergrok-heavy',      name:'SuperGrok Heavy',          cat:'ia',           feat:false, tag:'HEAVY',     stars:5, img:'assets/productos/grok-heavy.png',
     dur:'1 Mes',    usd:23,   pen:pen(23),
     desc:'La versión más potente de Grok. Mayor contexto, razonamiento extendido y análisis sin restricciones.' },
 
-  { id:'capcut-pro',           name:'CapCut Pro',               cat:'edicion',      feat:true,  tag:'POPULAR',   stars:5, img:'assets/products/capcut.png',
+  { id:'capcut-pro',           name:'CapCut Pro',               cat:'edicion',      feat:false, tag:'POPULAR',   stars:5, img:'assets/productos/capcut.png',
     dur:'1 Mes',    usd:3.5,  pen:pen(3.5),
     desc:'Edición de video con IA: elimina fondos, subtítulos automáticos, efectos cinematográficos y templates premium.' },
 
-  { id:'chatgpt-plus',         name:'ChatGPT Plus',             cat:'ia',           feat:true,  tag:null,        stars:5, img:'assets/products/chatgpt.png',
+  { id:'chatgpt-plus',         name:'ChatGPT Plus',             cat:'ia',           feat:false, tag:null,        stars:5, img:'assets/productos/chatgpt.png',
     dur:'1 Mes',    usd:7,    pen:pen(7),
     desc:'GPT-4o, DALL·E 3, navegación web en tiempo real y plugins avanzados. El estándar de la IA conversacional.' },
 
-  { id:'chatgpt-business',     name:'ChatGPT Business',         cat:'ia',           feat:false, tag:'BUSINESS',  stars:5, img:'assets/products/chatgpt-business.png',
+  { id:'chatgpt-business',     name:'ChatGPT Business',         cat:'ia',           feat:false, tag:'BUSINESS',  stars:5, img:'assets/productos/chatgpt-business.png',
     dur:'1 Mes',    usd:7,    pen:pen(7),
     desc:'Versión empresarial de ChatGPT. Tus conversaciones no entrenan modelos de OpenAI. Máxima privacidad.' },
 
-  { id:'adobe-pro-plus',       name:'Adobe Pro Plus',           cat:'edicion',      feat:false, tag:null,        stars:5, img:'assets/products/adobe.png',
+  { id:'adobe-pro-plus',       name:'Adobe Pro Plus',           cat:'edicion',      feat:false, tag:null,        stars:5, img:'assets/productos/adobe.png',
     multi:true,
     variants:[
       { type:'1 Mes',   dur:'1 Mes',   usd:10, pen:pen(10) },
@@ -46,31 +46,31 @@ const PRODUCTS = [
     ],
     desc:'Suite Adobe completa: Photoshop, Premiere Pro, After Effects, Illustrator y más. Creatividad sin límites.' },
 
-  { id:'n8n-starter',          name:'N8n Starter',              cat:'programacion', feat:false, tag:null,        stars:5, img:'assets/products/n8n.png',
+  { id:'n8n-starter',          name:'N8n Starter',              cat:'programacion', feat:false, tag:null,        stars:5, img:'assets/productos/n8n.png',
     dur:'1 Año',    usd:49,   pen:pen(49),
     desc:'Automatización de flujos sin código. Conecta apps, automatiza tareas y construye pipelines de IA.' },
 
-  { id:'canva-pro',            name:'Canva Pro',                cat:'edicion',      feat:false, tag:'OFERTA',    stars:5, img:'assets/products/canva.png',
+  { id:'canva-pro',            name:'Canva Pro',                cat:'edicion',      feat:false, tag:'OFERTA',    stars:5, img:'assets/productos/canva.png',
     dur:'1 Año',    usd:8,    pen:pen(8),
     desc:'+100M de templates, eliminación de fondos con IA, Brand Kit y colaboración en equipo.' },
 
-  { id:'gemini-workspace',     name:'Gemini Ultra Workspace',   cat:'ia',           feat:false, tag:'WORKSPACE', stars:4, img:'assets/products/gemini-workspace.png',
+  { id:'gemini-workspace',     name:'Gemini Ultra Workspace',   cat:'ia',           feat:false, tag:'WORKSPACE', stars:4, img:'assets/productos/gemini-workspace.png',
     dur:'1 Mes',    usd:15,   pen:pen(15),
     desc:'Correo corporativo con 25,000 créditos de Gemini. Ideal para equipos y proyectos empresariales.',
     warning:'Sin garantía' },
 
-  { id:'gemini-pro',           name:'Gemini Pro',               cat:'ia',           feat:false, tag:'GARANTÍA',  stars:5, img:'assets/products/gemini-pro.png',
+  { id:'gemini-pro',           name:'Gemini Pro',               cat:'ia',           feat:true,  tag:'TOP',       stars:5, img:'assets/productos/gemini-pro.png',
     dur:'18 Meses', usd:36,   pen:pen(36),
-    desc:'Directo a tu correo personal. 18 meses de acceso con garantía real de 12 meses.',
+    desc:'Ideal para productividad diaria con integración en ecosistema Google, herramientas de IA y almacenamiento amplio para uso continuo.',
     guarantee:'12 meses de garantía' },
 
-  { id:'claude-pro',           name:'Claude Pro',               cat:'ia',           feat:true,  tag:null,        stars:5, img:'assets/products/claude.png',
+  { id:'claude-pro',           name:'Claude Pro',               cat:'programacion', feat:false, tag:null,        stars:5, img:'assets/productos/claude.png',
     dur:'1 Mes',    usd:12,   pen:pen(12),
-    desc:'El modelo más preciso y seguro. Contexto de 200k tokens, proyectos organizados y acceso a Opus.' },
+    desc:'Orientado a programación y análisis técnico: contexto amplio, respuestas precisas y excelente rendimiento para documentación y código.' },
 
-  { id:'claude-max',           name:'Claude Max 5x',            cat:'ia',           feat:false, tag:'MAX',       stars:5, img:'assets/products/claude-max.png',
+  { id:'claude-max',           name:'Claude Max 5x',            cat:'programacion', feat:false, tag:'MAX',       stars:5, img:'assets/productos/claude-max.png',
     dur:'1 Mes',    usd:65,   pen:pen(65),
-    desc:'Límite de uso 5x mayor que Claude Pro. Para creadores y desarrolladores que no aceptan restricciones.' }
+    desc:'Plan de alto rendimiento para desarrollo intensivo: mayor capacidad de uso, sesiones largas y mejor flujo para equipos técnicos.' }
 ];
 
 const FEATURED = PRODUCTS.filter(p => p.feat);
@@ -260,6 +260,9 @@ function initCarousel() {
   document.getElementById('carNext').addEventListener('click', () => { goSlide((carIdx+1)%FEATURED.length); resetAuto(); });
 
   let tx = 0;
+  let touchDragging = false;
+  let touchStartX = 0;
+  let touchStartScrollLeft = 0;
   let isDown = false;
   let startX = 0;
   let startScrollLeft = 0;
@@ -290,6 +293,7 @@ function initCarousel() {
     if (!isDown) return;
     isDown = false;
     vp.classList.remove('dragging');
+    goSlide(carIdx);
   };
 
   const onMouseMove = e => {
@@ -309,10 +313,32 @@ function initCarousel() {
       isTicking = false;
     });
   };
-  vp.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive:true });
+  vp.addEventListener('touchstart', e => {
+    tx = e.touches[0].clientX;
+    touchDragging = true;
+    touchStartX = tx;
+    touchStartScrollLeft = vp.scrollLeft;
+    moved = false;
+    vp.classList.add('dragging');
+  }, { passive:true });
+  vp.addEventListener('touchmove', e => {
+    if (!touchDragging) return;
+    const x = e.touches[0].clientX;
+    const walk = x - touchStartX;
+    if (Math.abs(walk) > 3) moved = true;
+    vp.scrollLeft = touchStartScrollLeft - walk;
+  }, { passive:true });
   vp.addEventListener('touchend', e => {
+    if (!touchDragging) return;
+    touchDragging = false;
+    vp.classList.remove('dragging');
     const dx = e.changedTouches[0].clientX - tx;
-    if (Math.abs(dx) > 50) { goSlide(dx<0 ? (carIdx+1)%FEATURED.length : (carIdx-1+FEATURED.length)%FEATURED.length); resetAuto(); }
+    if (Math.abs(dx) > 35) {
+      goSlide(dx < 0 ? (carIdx+1)%FEATURED.length : (carIdx-1+FEATURED.length)%FEATURED.length);
+      resetAuto();
+    } else {
+      goSlide(carIdx);
+    }
   }, { passive:true });
   vp.addEventListener('mousedown', e => {
     isDown = true;
@@ -452,23 +478,23 @@ function openModal(p) {
           <div class="m-var-dur">${v.dur}</div>
         </div>
         <div class="m-price-vals">
-          <span class="m-pen">S/ ${v.pen}</span>
           <span class="m-usd">$${v.usd}</span>
+          <span class="m-pen">S/ ${v.pen}</span>
         </div>
       </div>`).join('')}</div>`;
   } else {
     priceHTML = `<div class="m-price-row">
       <span class="m-price-lbl">${p.dur}</span>
       <div class="m-price-vals">
-        <span class="m-pen">S/ ${p.pen}</span>
         <span class="m-usd">$${p.usd}</span>
+        <span class="m-pen">S/ ${p.pen}</span>
       </div>
     </div>`;
   }
 
   const badges = [
-    p.warning  ? `<span class="m-badge warn">⚠️ ${p.warning}</span>`  : '',
-    p.guarantee? `<span class="m-badge guar">🛡️ ${p.guarantee}</span>`: ''
+    p.warning  ? `<span class="m-badge warn">${p.warning}</span>`  : '',
+    p.guarantee? `<span class="m-badge guar">${p.guarantee}</span>`: ''
   ].join('');
 
   body.innerHTML = `
@@ -482,7 +508,7 @@ function openModal(p) {
     <div class="m-div"></div>
     ${priceHTML}
     <a href="${WA(p.name)}" class="m-buy" target="_blank" rel="noopener">
-      💬 Comprar por WhatsApp
+      Comprar por WhatsApp
     </a>`;
 
   modal.classList.add('open');

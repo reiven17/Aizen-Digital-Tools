@@ -245,7 +245,7 @@ function initCarousel() {
   const track = document.getElementById('carouselTrack');
   const dots  = document.getElementById('carDots');
   if (!track) return;
-  // A small, fixed swipe distance switches exactly one card and avoids extreme jumps.
+  // A small, fixed swipe distance advances exactly one card and avoids extreme jumps.
   const SWIPE_DISTANCE_PX = 32;
 
   FEATURED.forEach((p, i) => track.appendChild(buildFC(p, i)));

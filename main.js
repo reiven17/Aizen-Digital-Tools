@@ -1,856 +1,464 @@
-/* ═══════════════════════════════════════════════
-   AIZEN DIGITAL TOOLS — main.js
-   Particle hero · Carousel · Modal · Filters
-   Search · Scroll animations · Counter anim
-═══════════════════════════════════════════════ */
-
 'use strict';
 
-/* ════════════════════════════════════════
-   PRODUCT DATA
-════════════════════════════════════════ */
-/* Conversion: $USD * 3.4, floor to int */
-const USD_TO_PEN = 3.4;
-const pen = (usd) => Math.floor(usd * USD_TO_PEN);
-
-const WA_NUMBER = '51941797198';
-const WA_BASE   = `https://wa.me/${WA_NUMBER}?text=`;
-const WA_GROUP  = 'https://chat.whatsapp.com/KBYeX08mcx21ZmS5T1DQwE?mode=gi_t';
-
-function waLink(productName) {
-  const msg = encodeURIComponent(`Hola! Me interesa adquirir ${productName}. ¿Podría darme más información?`);
-  return `${WA_BASE}${msg}`;
-}
+/* ── PRODUCTOS ── */
+const pen = usd => Math.floor(usd * 3.4);
+const WA  = n => `https://wa.me/51941797198?text=${encodeURIComponent('Hola! Me interesa adquirir ' + n + '. ¿Me das más info?')}`;
 
 const PRODUCTS = [
-  {
-    id: 'antigravity-ultra',
-    name: 'Antigravity Ultra',
-    category: 'ia',
-    featured: false,
-    tag: null,
-    stars: 5,
-    image: 'assets/products/antigravity.png',
-    duration: '1 Mes',
-    priceUSD: 25,
-    pricePEN: pen(25),
-    description: 'Potencia máxima de IA con razonamiento avanzado, generación multimodal y análisis profundo. Eleva tu productividad a otro nivel.',
-  },
-  {
-    id: 'gemini-ultra',
-    name: 'Gemini Ultra',
-    category: 'ia',
-    featured: true,
-    tag: 'TOP',
-    stars: 5,
-    image: 'assets/products/gemini.png',
-    isMultiVariant: true,
-    variants: [
-      {
-        type: 'Cuenta Compartida',
-        duration: '1 Mes',
-        priceUSD: 10,
-        pricePEN: pen(10),
-      },
-      {
-        type: 'Cuenta Privada',
-        duration: '1 Mes',
-        priceUSD: 45,
-        pricePEN: pen(45),
-      },
+  { id:'antigravity-ultra',    name:'Antigravity Ultra',        cat:'ia',           feat:false, tag:null,        stars:5, img:'assets/products/antigravity.png',
+    dur:'1 Mes',    usd:25,   pen:pen(25),
+    desc:'Potencia máxima de IA: razonamiento avanzado, generación multimodal y análisis profundo sin límites.' },
+
+  { id:'gemini-ultra',         name:'Gemini Ultra',             cat:'ia',           feat:true,  tag:'TOP',       stars:5, img:'assets/products/gemini.png',
+    multi:true,
+    variants:[
+      { type:'Cuenta Compartida', dur:'1 Mes', usd:10,  pen:pen(10)  },
+      { type:'Cuenta Privada',    dur:'1 Mes', usd:45,  pen:pen(45)  }
     ],
-    description: 'La IA más avanzada de Google: generación de video ilimitada con Veo 3.1, análisis profundo, Notebooklm y razonamiento ultra veloz.',
-    descriptionVariants: {
-      'Cuenta Compartida': 'Acceso compartido sin créditos adicionales. Ideal para uso ocasional.',
-      'Cuenta Privada': 'Directamente a tu correo personal con 5,000 créditos incluidos. Máxima privacidad.',
-    },
-  },
-  {
-    id: 'supergrok',
-    name: 'SuperGrok',
-    category: 'ia',
-    featured: true,
-    tag: null,
-    stars: 5,
-    image: 'assets/products/grok.png',
-    duration: '1 Mes',
-    priceUSD: 7,
-    pricePEN: pen(7),
-    description: 'IA de xAI con razonamiento en tiempo real, acceso a datos de X y capacidades multimodales avanzadas. El cerebro que piensa diferente.',
-  },
-  {
-    id: 'supergrok-heavy',
-    name: 'SuperGrok Heavy',
-    category: 'ia',
-    featured: false,
-    tag: 'HEAVY',
-    stars: 5,
-    image: 'assets/products/grok-heavy.png',
-    duration: '1 Mes',
-    priceUSD: 23,
-    pricePEN: pen(23),
-    description: 'La versión más potente de Grok. Razonamiento extendido, mayor contexto y análisis profundo sin límites. Para usuarios exigentes.',
-  },
-  {
-    id: 'capcut-pro',
-    name: 'CapCut Pro',
-    category: 'edicion',
-    featured: true,
-    tag: 'POPULAR',
-    stars: 5,
-    image: 'assets/products/capcut.png',
-    duration: '1 Mes',
-    priceUSD: 3.5,
-    pricePEN: pen(3.5),
-    description: 'Edición de video profesional con IA. Elimina fondos, subtítulos automáticos, efectos cinematográficos y templates premium. Todo desde tu celular.',
-  },
-  {
-    id: 'chatgpt-plus',
-    name: 'ChatGPT Plus',
-    category: 'ia',
-    featured: true,
-    tag: null,
-    stars: 5,
-    image: 'assets/products/chatgpt.png',
-    duration: '1 Mes',
-    priceUSD: 7,
-    pricePEN: pen(7),
-    description: 'GPT-4o, generación de imágenes con DALL·E 3, navegación web en tiempo real y plugins avanzados. El estándar de la IA conversacional.',
-  },
-  {
-    id: 'chatgpt-business',
-    name: 'ChatGPT Business',
-    category: 'ia',
-    featured: false,
-    tag: 'BUSINESS',
-    stars: 5,
-    image: 'assets/products/chatgpt-business.png',
-    duration: '1 Mes',
-    priceUSD: 7,
-    pricePEN: pen(7),
-    description: 'Versión empresarial de ChatGPT. Tus conversaciones no entrenan modelos de OpenAI. Mayor privacidad y acceso prioritario a nuevas funciones.',
-  },
-  {
-    id: 'adobe-pro-plus',
-    name: 'Adobe Pro Plus',
-    category: 'edicion',
-    featured: false,
-    tag: null,
-    stars: 5,
-    image: 'assets/products/adobe.png',
-    isMultiVariant: true,
-    variants: [
-      { type: '1 Mes',    duration: '1 Mes',    priceUSD: 10, pricePEN: pen(10) },
-      { type: '3 Meses',  duration: '3 Meses',  priceUSD: 24, pricePEN: pen(24) },
-      { type: '6 Meses',  duration: '6 Meses',  priceUSD: 39, pricePEN: pen(39) },
+    desc:'La IA más avanzada de Google: videos ilimitados con Veo 3.1, razonamiento ultra veloz y Notebooklm.' },
+
+  { id:'supergrok',            name:'SuperGrok',                cat:'ia',           feat:true,  tag:null,        stars:5, img:'assets/products/grok.png',
+    dur:'1 Mes',    usd:7,    pen:pen(7),
+    desc:'IA de xAI con razonamiento en tiempo real, acceso a X y capacidades multimodales avanzadas.' },
+
+  { id:'supergrok-heavy',      name:'SuperGrok Heavy',          cat:'ia',           feat:false, tag:'HEAVY',     stars:5, img:'assets/products/grok-heavy.png',
+    dur:'1 Mes',    usd:23,   pen:pen(23),
+    desc:'La versión más potente de Grok. Mayor contexto, razonamiento extendido y análisis sin restricciones.' },
+
+  { id:'capcut-pro',           name:'CapCut Pro',               cat:'edicion',      feat:true,  tag:'POPULAR',   stars:5, img:'assets/products/capcut.png',
+    dur:'1 Mes',    usd:3.5,  pen:pen(3.5),
+    desc:'Edición de video con IA: elimina fondos, subtítulos automáticos, efectos cinematográficos y templates premium.' },
+
+  { id:'chatgpt-plus',         name:'ChatGPT Plus',             cat:'ia',           feat:true,  tag:null,        stars:5, img:'assets/products/chatgpt.png',
+    dur:'1 Mes',    usd:7,    pen:pen(7),
+    desc:'GPT-4o, DALL·E 3, navegación web en tiempo real y plugins avanzados. El estándar de la IA conversacional.' },
+
+  { id:'chatgpt-business',     name:'ChatGPT Business',         cat:'ia',           feat:false, tag:'BUSINESS',  stars:5, img:'assets/products/chatgpt-business.png',
+    dur:'1 Mes',    usd:7,    pen:pen(7),
+    desc:'Versión empresarial de ChatGPT. Tus conversaciones no entrenan modelos de OpenAI. Máxima privacidad.' },
+
+  { id:'adobe-pro-plus',       name:'Adobe Pro Plus',           cat:'edicion',      feat:false, tag:null,        stars:5, img:'assets/products/adobe.png',
+    multi:true,
+    variants:[
+      { type:'1 Mes',   dur:'1 Mes',   usd:10, pen:pen(10) },
+      { type:'3 Meses', dur:'3 Meses', usd:24, pen:pen(24) },
+      { type:'6 Meses', dur:'6 Meses', usd:39, pen:pen(39) }
     ],
-    description: 'Suite completa de Adobe: Photoshop, Premiere Pro, After Effects, Illustrator y más. Creatividad sin límites para profesionales.',
-  },
-  {
-    id: 'n8n-starter',
-    name: 'N8n Starter',
-    category: 'programacion',
-    featured: false,
-    tag: null,
-    stars: 5,
-    image: 'assets/products/n8n.png',
-    duration: '1 Año',
-    priceUSD: 49,
-    pricePEN: pen(49),
-    description: 'Automatización de flujos sin código. Conecta apps, automatiza tareas repetitivas y construye pipelines de IA. Poder de desarrollador sin serlo.',
-  },
-  {
-    id: 'canva-pro',
-    name: 'Canva Pro',
-    category: 'edicion',
-    featured: false,
-    tag: 'OFERTA',
-    stars: 5,
-    image: 'assets/products/canva.png',
-    duration: '1 Año',
-    priceUSD: 8,
-    pricePEN: pen(8),
-    description: 'Diseño gráfico profesional para todos. Más de 100M de templates, eliminación de fondos con IA, Brand Kit y colaboración en equipo.',
-  },
-  {
-    id: 'gemini-ultra-workspace',
-    name: 'Gemini Ultra Workspace',
-    category: 'ia',
-    featured: false,
-    tag: 'WORKSPACE',
-    stars: 4,
-    image: 'assets/products/gemini-workspace.png',
-    duration: '1 Mes',
-    priceUSD: 15,
-    pricePEN: pen(15),
-    description: 'Correo corporativo con 25,000 créditos de Gemini. Acceso empresarial con IA integrada. Ideal para equipos y proyectos. Sin garantía.',
-    warning: 'Sin garantía',
-  },
-  {
-    id: 'gemini-pro',
-    name: 'Gemini Pro',
-    category: 'ia',
-    featured: false,
-    tag: 'GARANTÍA',
-    stars: 5,
-    image: 'assets/products/gemini-pro.png',
-    duration: '18 Meses',
-    priceUSD: 36,
-    pricePEN: pen(36),
-    description: 'Directamente a tu correo personal. 18 meses de acceso continuo con garantía de 12 meses. Inversión inteligente a largo plazo.',
-    guarantee: '12 meses de garantía',
-  },
-  {
-    id: 'claude-pro',
-    name: 'Claude Pro',
-    category: 'ia',
-    featured: true,
-    tag: null,
-    stars: 5,
-    image: 'assets/products/claude.png',
-    duration: '1 Mes',
-    priceUSD: 12,
-    pricePEN: pen(12),
-    description: 'El modelo de IA más preciso y seguro. Contexto extendido de 200k tokens, proyectos organizados y acceso prioritario a Claude Sonnet y Opus.',
-  },
-  {
-    id: 'claude-max',
-    name: 'Claude Max 5x',
-    category: 'ia',
-    featured: false,
-    tag: 'MAX',
-    stars: 5,
-    image: 'assets/products/claude-max.png',
-    duration: '1 Mes',
-    priceUSD: 65,
-    pricePEN: pen(65),
-    description: 'Límite de uso 5x mayor que Claude Pro. Para creadores, desarrolladores y profesionales que necesitan máxima potencia sin interrupciones.',
-  },
+    desc:'Suite Adobe completa: Photoshop, Premiere Pro, After Effects, Illustrator y más. Creatividad sin límites.' },
+
+  { id:'n8n-starter',          name:'N8n Starter',              cat:'programacion', feat:false, tag:null,        stars:5, img:'assets/products/n8n.png',
+    dur:'1 Año',    usd:49,   pen:pen(49),
+    desc:'Automatización de flujos sin código. Conecta apps, automatiza tareas y construye pipelines de IA.' },
+
+  { id:'canva-pro',            name:'Canva Pro',                cat:'edicion',      feat:false, tag:'OFERTA',    stars:5, img:'assets/products/canva.png',
+    dur:'1 Año',    usd:8,    pen:pen(8),
+    desc:'+100M de templates, eliminación de fondos con IA, Brand Kit y colaboración en equipo.' },
+
+  { id:'gemini-workspace',     name:'Gemini Ultra Workspace',   cat:'ia',           feat:false, tag:'WORKSPACE', stars:4, img:'assets/products/gemini-workspace.png',
+    dur:'1 Mes',    usd:15,   pen:pen(15),
+    desc:'Correo corporativo con 25,000 créditos de Gemini. Ideal para equipos y proyectos empresariales.',
+    warning:'Sin garantía' },
+
+  { id:'gemini-pro',           name:'Gemini Pro',               cat:'ia',           feat:false, tag:'GARANTÍA',  stars:5, img:'assets/products/gemini-pro.png',
+    dur:'18 Meses', usd:36,   pen:pen(36),
+    desc:'Directo a tu correo personal. 18 meses de acceso con garantía real de 12 meses.',
+    guarantee:'12 meses de garantía' },
+
+  { id:'claude-pro',           name:'Claude Pro',               cat:'ia',           feat:true,  tag:null,        stars:5, img:'assets/products/claude.png',
+    dur:'1 Mes',    usd:12,   pen:pen(12),
+    desc:'El modelo más preciso y seguro. Contexto de 200k tokens, proyectos organizados y acceso a Opus.' },
+
+  { id:'claude-max',           name:'Claude Max 5x',            cat:'ia',           feat:false, tag:'MAX',       stars:5, img:'assets/products/claude-max.png',
+    dur:'1 Mes',    usd:65,   pen:pen(65),
+    desc:'Límite de uso 5x mayor que Claude Pro. Para creadores y desarrolladores que no aceptan restricciones.' }
 ];
 
-const FEATURED = PRODUCTS.filter(p => p.featured);
+const FEATURED = PRODUCTS.filter(p => p.feat);
 
-
-/* ════════════════════════════════════════
-   DOM REFS
-════════════════════════════════════════ */
-const $ = (sel, ctx = document) => ctx.querySelector(sel);
-const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
-
-const DOM = {
-  loader:          $('#loader'),
-  loaderFill:      $('#loaderFill'),
-  loaderPercent:   $('#loaderPercent'),
-  app:             $('#app'),
-  navbar:          $('#navbar'),
-  heroCanvas:      $('#heroCanvas'),
-  carouselTrack:   $('#carouselTrack'),
-  carouselPrev:    $('#carouselPrev'),
-  carouselNext:    $('#carouselNext'),
-  carouselDots:    $('#carouselDots'),
-  searchInput:     $('#searchInput'),
-  searchClear:     $('#searchClear'),
-  categoryPills:   $$('.pill'),
-  productsGrid:    $('#productsGrid'),
-  noResults:       $('#noResults'),
-  noResultsQuery:  $('#noResultsQuery'),
-  modal:           $('#productModal'),
-  modalBackdrop:   $('#modalBackdrop'),
-  modalSheet:      $('#modalSheet'),
-  modalClose:      $('#modalClose'),
-  modalBody:       $('#modalBody'),
-};
-
-
-/* ════════════════════════════════════════
-   LOADER
-════════════════════════════════════════ */
+/* ── LOADER (1.8 segundos) ── */
 function initLoader() {
-  let progress = 0;
-  const duration = 2200; // ms total
-  const interval = 40;
-  const steps = duration / interval;
+  const fill = document.getElementById('loaderFill');
+  const pct  = document.getElementById('loaderPct');
+  const dur  = 1800;
+  const start = performance.now();
 
-  const tick = setInterval(() => {
-    // Eased progress: fast start, slow middle, fast end
-    const remaining = 100 - progress;
-    const speed = Math.random() * (remaining * 0.12) + 0.3;
-    progress = Math.min(progress + speed, 97);
-
-    setLoaderProgress(progress);
-
-    if (progress >= 97) {
-      clearInterval(tick);
-      setTimeout(() => {
-        setLoaderProgress(100);
-        setTimeout(exitLoader, 400);
-      }, 300);
+  function tick(now) {
+    const t = Math.min((now - start) / dur, 1);
+    // ease in-out quad
+    const e = t < .5 ? 2*t*t : 1 - Math.pow(-2*t+2,2)/2;
+    const v = Math.floor(e * 100);
+    fill.style.width = (e * 100) + '%';
+    pct.textContent  = v + '%';
+    if (t < 1) {
+      requestAnimationFrame(tick);
+    } else {
+      fill.style.width = '100%';
+      pct.textContent  = '100%';
+      setTimeout(exitLoader, 200);
     }
-  }, interval);
-}
-
-function setLoaderProgress(val) {
-  const v = Math.floor(val);
-  DOM.loaderFill.style.width = val + '%';
-  DOM.loaderPercent.textContent = v + '%';
-  if (DOM.loader.querySelector('.loader-bar'))
-    DOM.loader.querySelector('.loader-bar').setAttribute('aria-valuenow', v);
+  }
+  requestAnimationFrame(tick);
 }
 
 function exitLoader() {
-  DOM.loader.classList.add('exit');
-  DOM.app.classList.add('visible');
-  setTimeout(() => {
-    DOM.loader.style.display = 'none';
-  }, 900);
+  const loader = document.getElementById('loader');
+  const app    = document.getElementById('app');
+  loader.classList.add('exit');
+  app.classList.add('show');
+  setTimeout(() => { loader.style.display = 'none'; }, 800);
   initApp();
 }
 
-
-/* ════════════════════════════════════════
-   HERO CANVAS — PARTICLE NETWORK
-════════════════════════════════════════ */
-let heroAnimId = null;
-
-function initHeroCanvas() {
-  const canvas = DOM.heroCanvas;
+/* ── HERO CANVAS ── */
+function initCanvas() {
+  const canvas = document.getElementById('heroCanvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
-  const COLORS = [
-    [180, 78, 248],   // purple neon
-    [167, 139, 250],  // purple-400
-    [196, 181, 253],  // purple-300
-    [255, 255, 255],  // white
-    [217, 70, 239],   // purple-glow
+  const COLS = [
+    [180,78,248], [167,139,250], [196,181,253], [217,70,239], [255,255,255]
   ];
 
-  let W, H, particles;
+  let W, H, parts;
 
   function resize() {
     W = canvas.width  = window.innerWidth;
     H = canvas.height = window.innerHeight;
   }
 
-  class Particle {
+  class P {
     constructor() { this.init(); }
     init() {
       this.x  = Math.random() * W;
       this.y  = Math.random() * H;
-      this.vx = (Math.random() - 0.5) * 0.5;
-      this.vy = (Math.random() - 0.5) * 0.5;
-      this.r  = Math.random() * 1.8 + 0.4;
-      this.c  = COLORS[Math.floor(Math.random() * COLORS.length)];
-      this.a  = Math.random() * 0.5 + 0.2;
-      this.pulse = Math.random() * Math.PI * 2;
+      this.vx = (Math.random() - .5) * .45;
+      this.vy = (Math.random() - .5) * .45;
+      this.r  = Math.random() * 1.8 + .4;
+      this.c  = COLS[Math.floor(Math.random() * COLS.length)];
+      this.a  = Math.random() * .5 + .2;
+      this.ph = Math.random() * Math.PI * 2;
     }
     update() {
       this.x += this.vx;
       this.y += this.vy;
-      this.pulse += 0.02;
-      const pa = this.a + Math.sin(this.pulse) * 0.15;
+      this.ph += .018;
       if (this.x < 0) this.x = W;
       if (this.x > W) this.x = 0;
       if (this.y < 0) this.y = H;
       if (this.y > H) this.y = 0;
-      this._pa = pa;
+      this._a = this.a + Math.sin(this.ph) * .15;
     }
     draw() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${this.c[0]},${this.c[1]},${this.c[2]},${this._pa})`;
+      ctx.fillStyle = `rgba(${this.c[0]},${this.c[1]},${this.c[2]},${this._a})`;
       ctx.fill();
     }
   }
 
-  const CONNECTION_DIST = Math.min(W * 0.15, 160);
-
   function connect() {
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const d2 = dx * dx + dy * dy;
-        const maxD = CONNECTION_DIST;
-        if (d2 < maxD * maxD) {
-          const dist = Math.sqrt(d2);
-          const alpha = (1 - dist / maxD) * 0.22;
+    const md = Math.min(W * .14, 150);
+    for (let i = 0; i < parts.length; i++) {
+      for (let j = i + 1; j < parts.length; j++) {
+        const dx = parts[i].x - parts[j].x;
+        const dy = parts[i].y - parts[j].y;
+        const d2 = dx*dx + dy*dy;
+        if (d2 < md * md) {
+          const a = (1 - Math.sqrt(d2)/md) * .22;
           ctx.beginPath();
-          ctx.strokeStyle = `rgba(167,139,250,${alpha})`;
-          ctx.lineWidth = 0.6;
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(167,139,250,${a})`;
+          ctx.lineWidth = .6;
+          ctx.moveTo(parts[i].x, parts[i].y);
+          ctx.lineTo(parts[j].x, parts[j].y);
           ctx.stroke();
         }
       }
     }
   }
 
-  function buildParticles() {
-    const count = Math.floor((W * H) / 14000);
-    particles = Array.from({ length: Math.min(count, 90) }, () => new Particle());
+  function build() {
+    const n = Math.min(Math.floor(W*H/13000), 90);
+    parts = Array.from({ length: n }, () => new P());
   }
 
-  function animate() {
+  function loop() {
     ctx.clearRect(0, 0, W, H);
-    particles.forEach(p => { p.update(); p.draw(); });
+    parts.forEach(p => { p.update(); p.draw(); });
     connect();
-    heroAnimId = requestAnimationFrame(animate);
+    requestAnimationFrame(loop);
   }
 
   resize();
-  buildParticles();
-  animate();
-
-  window.addEventListener('resize', () => {
-    resize();
-    buildParticles();
-  }, { passive: true });
+  build();
+  loop();
+  window.addEventListener('resize', () => { resize(); build(); }, { passive: true });
 }
 
-
-/* ════════════════════════════════════════
-   NAVBAR — SCROLL BEHAVIOR
-════════════════════════════════════════ */
-function initNavbar() {
-  const nav = DOM.navbar;
-  let ticking = false;
-
+/* ── NAVBAR ── */
+function initNav() {
+  const nav = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        nav.classList.toggle('scrolled', window.scrollY > 50);
-        ticking = false;
-      });
-      ticking = true;
-    }
+    nav.classList.toggle('scrolled', window.scrollY > 50);
   }, { passive: true });
 }
 
-
-/* ════════════════════════════════════════
-   SCROLL REVEAL
-════════════════════════════════════════ */
-function initScrollReveal() {
-  const els = $$('[data-reveal]');
-  if (!els.length) return;
-
-  const io = new IntersectionObserver((entries) => {
+/* ── SCROLL REVEAL ── */
+function initReveal() {
+  const els = document.querySelectorAll('[data-reveal]');
+  const io  = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        const delay = parseInt(e.target.dataset.delay || 0);
-        setTimeout(() => e.target.classList.add('revealed'), delay);
+        e.target.classList.add('revealed');
         io.unobserve(e.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
+  }, { threshold: .12, rootMargin: '0px 0px -40px 0px' });
   els.forEach(el => io.observe(el));
 }
 
-
-/* ════════════════════════════════════════
-   COUNTER ANIMATION
-════════════════════════════════════════ */
+/* ── COUNTER ── */
 function initCounters() {
-  const counters = $$('[data-count]');
-  if (!counters.length) return;
-
-  const io = new IntersectionObserver((entries) => {
+  const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        animateCount(e.target);
+        const target = +e.target.dataset.count;
+        const dur    = 1400;
+        const start  = performance.now();
+        (function tick(now) {
+          const p = Math.min((now-start)/dur,1);
+          const v = 1 - Math.pow(1-p,3);
+          e.target.textContent = Math.floor(v*target);
+          if (p < 1) requestAnimationFrame(tick);
+          else e.target.textContent = target;
+        })(performance.now());
         io.unobserve(e.target);
       }
     });
-  }, { threshold: 0.5 });
-
-  counters.forEach(el => io.observe(el));
+  }, { threshold: .5 });
+  document.querySelectorAll('[data-count]').forEach(el => io.observe(el));
 }
 
-function animateCount(el) {
-  const target = parseInt(el.dataset.count);
-  const duration = 1400;
-  const start = performance.now();
-
-  function update(now) {
-    const elapsed = now - start;
-    const progress = Math.min(elapsed / duration, 1);
-    const ease = 1 - Math.pow(1 - progress, 3);
-    el.textContent = Math.floor(ease * target);
-    if (progress < 1) requestAnimationFrame(update);
-    else el.textContent = target;
-  }
-
-  requestAnimationFrame(update);
-}
-
-
-/* ════════════════════════════════════════
-   CAROUSEL — FEATURED CARDS
-════════════════════════════════════════ */
-let carouselIndex = 0;
-let carouselAutoTimer = null;
+/* ── CAROUSEL ── */
+let carIdx = 0, carTimer;
 
 function initCarousel() {
-  const track = DOM.carouselTrack;
-  const dotsWrap = DOM.carouselDots;
+  const track = document.getElementById('carouselTrack');
+  const dots  = document.getElementById('carDots');
   if (!track) return;
 
-  // Build cards
-  FEATURED.forEach((product, i) => {
-    const card = buildFeaturedCard(product, i);
-    track.appendChild(card);
+  FEATURED.forEach((p, i) => track.appendChild(buildFC(p, i)));
+
+  FEATURED.forEach((p, i) => {
+    const d = document.createElement('button');
+    d.className = 'car-dot' + (i===0 ? ' active' : '');
+    d.setAttribute('aria-label', p.name);
+    d.addEventListener('click', () => { goSlide(i); resetAuto(); });
+    dots.appendChild(d);
   });
 
-  // Build dots
-  FEATURED.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-    dot.setAttribute('aria-label', `Ir a ${FEATURED[i].name}`);
-    dot.setAttribute('role', 'tab');
-    dot.addEventListener('click', () => goToSlide(i));
-    dotsWrap.appendChild(dot);
-  });
+  document.getElementById('carPrev').addEventListener('click', () => { goSlide((carIdx-1+FEATURED.length)%FEATURED.length); resetAuto(); });
+  document.getElementById('carNext').addEventListener('click', () => { goSlide((carIdx+1)%FEATURED.length); resetAuto(); });
 
-  updateCarouselUI();
+  let tx = 0;
+  const vp = track.parentElement;
+  vp.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive:true });
+  vp.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 50) { goSlide(dx<0 ? (carIdx+1)%FEATURED.length : (carIdx-1+FEATURED.length)%FEATURED.length); resetAuto(); }
+  }, { passive:true });
 
-  DOM.carouselPrev.addEventListener('click', () => {
-    goToSlide((carouselIndex - 1 + FEATURED.length) % FEATURED.length);
-    resetAutoPlay();
-  });
-  DOM.carouselNext.addEventListener('click', () => {
-    goToSlide((carouselIndex + 1) % FEATURED.length);
-    resetAutoPlay();
-  });
-
-  // Touch swipe
-  let touchStartX = 0;
-  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-  track.addEventListener('touchend', e => {
-    const dx = e.changedTouches[0].clientX - touchStartX;
-    if (Math.abs(dx) > 50) {
-      goToSlide(dx < 0
-        ? (carouselIndex + 1) % FEATURED.length
-        : (carouselIndex - 1 + FEATURED.length) % FEATURED.length
-      );
-      resetAutoPlay();
-    }
-  }, { passive: true });
-
-  startAutoPlay();
+  startAuto();
 }
 
-function goToSlide(index) {
-  carouselIndex = index;
-  updateCarouselUI();
+function goSlide(i) {
+  carIdx = i;
+  const cards = document.querySelectorAll('.fc');
+  const dots  = document.querySelectorAll('.car-dot');
+  cards.forEach((c, j) => c.classList.toggle('active', j===i));
+  dots.forEach((d, j) => d.classList.toggle('active', j===i));
+  const vp = document.getElementById('carouselTrack').parentElement;
+  const c  = cards[i];
+  if (c) vp.scrollTo({ left: c.offsetLeft - vp.offsetWidth/2 + c.offsetWidth/2, behavior:'smooth' });
 }
 
-function updateCarouselUI() {
-  const cards = $$('.featured-card', DOM.carouselTrack);
-  const dots  = $$('.carousel-dot', DOM.carouselDots);
+function startAuto() { carTimer = setInterval(() => goSlide((carIdx+1)%FEATURED.length), 4500); }
+function resetAuto()  { clearInterval(carTimer); startAuto(); }
 
-  cards.forEach((card, i) => {
-    card.classList.toggle('is-active', i === carouselIndex);
-  });
-
-  dots.forEach((dot, i) => {
-    dot.classList.toggle('active', i === carouselIndex);
-    dot.setAttribute('aria-selected', i === carouselIndex);
-  });
-
-  // Slide track to center active card
-  const activeCard = cards[carouselIndex];
-  if (activeCard) {
-    const viewport = DOM.carouselTrack.parentElement;
-    const scrollTarget = activeCard.offsetLeft - viewport.offsetWidth / 2 + activeCard.offsetWidth / 2;
-    viewport.scrollTo({ left: scrollTarget, behavior: 'smooth' });
-  }
-}
-
-function startAutoPlay() {
-  carouselAutoTimer = setInterval(() => {
-    goToSlide((carouselIndex + 1) % FEATURED.length);
-  }, 4500);
-}
-function resetAutoPlay() {
-  clearInterval(carouselAutoTimer);
-  startAutoPlay();
-}
-
-function buildFeaturedCard(product, index) {
-  const card = document.createElement('div');
-  card.className = 'featured-card' + (index === 0 ? ' is-active' : '');
-  card.setAttribute('role', 'listitem');
-  card.setAttribute('aria-label', product.name);
-
-  const displayPrice = product.isMultiVariant
-    ? `Desde S/ ${product.variants[0].pricePEN}`
-    : `S/ ${product.pricePEN}`;
-  const displayUSD = product.isMultiVariant
-    ? `Desde $${product.variants[0].priceUSD}`
-    : `$${product.priceUSD}`;
-  const displayDuration = product.isMultiVariant
-    ? product.variants[0].duration
-    : product.duration;
-
-  card.innerHTML = `
-    ${product.tag ? `<span class="card-tag">${product.tag}</span>` : ''}
-    <div class="card-logo-wrap">
-      <img
-        src="${product.image}"
-        alt="${product.name}"
-        onerror="this.outerHTML='<span class=\'card-logo-fallback\'>${product.name[0]}</span>'"
-      >
+function buildFC(p, i) {
+  const el = document.createElement('div');
+  el.className = 'fc' + (i===0 ? ' active' : '');
+  const dp  = p.multi ? `Desde S/ ${p.variants[0].pen}` : `S/ ${p.pen}`;
+  const du  = p.multi ? `Desde $${p.variants[0].usd}`  : `$${p.usd}`;
+  const dr  = p.multi ? p.variants[0].dur : p.dur;
+  el.innerHTML = `
+    ${p.tag ? `<span class="fc-tag">${p.tag}</span>` : ''}
+    <div class="fc-logo">
+      <img src="${p.img}" alt="${p.name}" onerror="this.outerHTML='<span class=\\'fc-logo-fb\\'>${p.name[0]}</span>'">
     </div>
-    <div class="card-name">${product.name}</div>
-    <div class="card-stars">${'★'.repeat(product.stars)}${'☆'.repeat(5 - product.stars)}</div>
-    <p class="card-desc">${product.description.substring(0, 90)}…</p>
-    <div class="card-price-row">
-      <span class="card-duration">${displayDuration}</span>
-      <div class="card-prices">
-        <span class="card-price-pen">${displayPrice}</span>
-        <span class="card-price-usd">${displayUSD}</span>
+    <div class="fc-name">${p.name}</div>
+    <div class="fc-stars">${'★'.repeat(p.stars)}${'☆'.repeat(5-p.stars)}</div>
+    <p class="fc-desc">${p.desc.substring(0,90)}…</p>
+    <div class="fc-price-row">
+      <span class="fc-dur">${dr}</span>
+      <div class="fc-prices">
+        <span class="fc-pen">${dp}</span>
+        <span class="fc-usd">${du}</span>
       </div>
     </div>
-    <button class="card-cta">Ver Detalles</button>
-  `;
-
-  card.addEventListener('click', () => openModal(product));
-  return card;
+    <button class="fc-cta">Ver Detalles</button>`;
+  el.addEventListener('click', () => openModal(p));
+  return el;
 }
 
-
-/* ════════════════════════════════════════
-   CATALOG — PRODUCT GRID
-════════════════════════════════════════ */
-let activeFilter = 'all';
-let searchQuery  = '';
+/* ── CATALOG ── */
+let activeFilter = 'all', searchQ = '';
 
 function initCatalog() {
-  renderProducts();
-  initFilters();
-  initSearch();
-}
+  render();
 
-function renderProducts() {
-  const grid = DOM.productsGrid;
-  grid.innerHTML = '';
-
-  const filtered = PRODUCTS.filter(p => {
-    const matchFilter = activeFilter === 'all' || p.category === activeFilter;
-    const q = searchQuery.toLowerCase().trim();
-    const matchSearch = !q ||
-      p.name.toLowerCase().includes(q) ||
-      (p.description || '').toLowerCase().includes(q) ||
-      p.category.toLowerCase().includes(q);
-    return matchFilter && matchSearch;
+  document.querySelectorAll('.pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      activeFilter = pill.dataset.filter;
+      render();
+    });
   });
 
-  if (filtered.length === 0) {
-    DOM.noResults.style.display = 'block';
-    DOM.noResultsQuery.textContent = searchQuery;
+  const inp = document.getElementById('searchInput');
+  const clr = document.getElementById('searchClr');
+  let deb;
+  inp.addEventListener('input', () => {
+    clearTimeout(deb);
+    deb = setTimeout(() => {
+      searchQ = inp.value;
+      clr.style.display = searchQ ? 'block' : 'none';
+      render();
+    }, 200);
+  });
+  clr.addEventListener('click', () => {
+    inp.value = ''; searchQ = '';
+    clr.style.display = 'none';
+    render(); inp.focus();
+  });
+}
+
+function render() {
+  const grid = document.getElementById('prodGrid');
+  const noR  = document.getElementById('noRes');
+  const noRQ = document.getElementById('noResQ');
+  grid.innerHTML = '';
+
+  const list = PRODUCTS.filter(p => {
+    const fm = activeFilter === 'all' || p.cat === activeFilter;
+    const q  = searchQ.toLowerCase().trim();
+    const sm = !q || p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q);
+    return fm && sm;
+  });
+
+  if (!list.length) {
+    noR.style.display = 'block';
+    noRQ.textContent  = searchQ;
   } else {
-    DOM.noResults.style.display = 'none';
-    filtered.forEach((product, i) => {
-      const card = buildProductCard(product, i);
-      grid.appendChild(card);
+    noR.style.display = 'none';
+    list.forEach((p, i) => {
+      const c = document.createElement('div');
+      c.className = 'pc';
+      c.style.animationDelay = (i * .05) + 's';
+      const dp = p.multi ? `Desde S/ ${p.variants[0].pen}` : `S/ ${p.pen}`;
+      const dr = p.multi ? p.variants[0].dur : p.dur;
+      c.innerHTML = `
+        ${p.tag ? `<span class="pc-tag">${p.tag}</span>` : ''}
+        <div class="pc-logo">
+          <img src="${p.img}" alt="${p.name}" onerror="this.outerHTML='<span class=\\'pc-logo-fb\\'>${p.name[0]}</span>'">
+        </div>
+        <div class="pc-name">${p.name}</div>
+        <div class="pc-stars">${'★'.repeat(p.stars)}${'☆'.repeat(5-p.stars)}</div>
+        <div class="pc-dur">${dr}</div>
+        <div class="pc-price">${dp}</div>
+        <button class="pc-btn">Ver Detalles</button>`;
+      c.addEventListener('click', () => openModal(p));
+      grid.appendChild(c);
     });
   }
 }
 
-function buildProductCard(product, index) {
-  const card = document.createElement('div');
-  card.className = 'product-card';
-  card.setAttribute('role', 'listitem');
-  card.style.animationDelay = `${index * 0.05}s`;
+/* ── MODAL ── */
+function openModal(p) {
+  const modal = document.getElementById('modal');
+  const body  = document.getElementById('modalBody');
 
-  const displayPrice = product.isMultiVariant
-    ? `Desde S/ ${product.variants[0].pricePEN}`
-    : `S/ ${product.pricePEN}`;
-  const displayDuration = product.isMultiVariant
-    ? product.variants[0].duration
-    : product.duration;
+  let priceHTML = '';
+  if (p.multi) {
+    priceHTML = `<div class="m-variants">${p.variants.map(v => `
+      <div class="m-var">
+        <div>
+          <div class="m-var-type">${v.type}</div>
+          <div class="m-var-dur">${v.dur}</div>
+        </div>
+        <div class="m-price-vals">
+          <span class="m-pen">S/ ${v.pen}</span>
+          <span class="m-usd">$${v.usd}</span>
+        </div>
+      </div>`).join('')}</div>`;
+  } else {
+    priceHTML = `<div class="m-price-row">
+      <span class="m-price-lbl">${p.dur}</span>
+      <div class="m-price-vals">
+        <span class="m-pen">S/ ${p.pen}</span>
+        <span class="m-usd">$${p.usd}</span>
+      </div>
+    </div>`;
+  }
 
-  card.innerHTML = `
-    ${product.tag ? `<span class="product-card-tag">${product.tag}</span>` : ''}
-    <div class="product-card-logo">
-      <img
-        src="${product.image}"
-        alt="${product.name}"
-        onerror="this.outerHTML='<span class=\'product-card-logo-fallback\'>${product.name[0]}</span>'"
-      >
+  const badges = [
+    p.warning  ? `<span class="m-badge warn">⚠️ ${p.warning}</span>`  : '',
+    p.guarantee? `<span class="m-badge guar">🛡️ ${p.guarantee}</span>`: ''
+  ].join('');
+
+  body.innerHTML = `
+    <div class="m-logo">
+      <img src="${p.img}" alt="${p.name}" onerror="this.outerHTML='<span class=\\'m-logo-fb\\'>${p.name[0]}</span>'">
     </div>
-    <div class="product-card-name">${product.name}</div>
-    <div class="product-card-stars">${'★'.repeat(product.stars)}${'☆'.repeat(5 - product.stars)}</div>
-    <div class="product-card-duration">${displayDuration}</div>
-    <div class="product-card-price">${displayPrice}</div>
-    <button class="product-card-btn">Ver Detalles</button>
-  `;
-
-  card.addEventListener('click', () => openModal(product));
-  return card;
-}
-
-function initFilters() {
-  DOM.categoryPills.forEach(pill => {
-    pill.addEventListener('click', () => {
-      DOM.categoryPills.forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
-      activeFilter = pill.dataset.filter;
-      renderProducts();
-    });
-  });
-}
-
-function initSearch() {
-  const input = DOM.searchInput;
-  const clear = DOM.searchClear;
-  if (!input) return;
-
-  let debounce;
-  input.addEventListener('input', () => {
-    clearTimeout(debounce);
-    debounce = setTimeout(() => {
-      searchQuery = input.value;
-      clear.style.display = searchQuery ? 'block' : 'none';
-      renderProducts();
-    }, 200);
-  });
-
-  clear.addEventListener('click', () => {
-    input.value = '';
-    searchQuery = '';
-    clear.style.display = 'none';
-    renderProducts();
-    input.focus();
-  });
-}
-
-
-/* ════════════════════════════════════════
-   MODAL
-════════════════════════════════════════ */
-function openModal(product) {
-  const modal = DOM.modal;
-  const body  = DOM.modalBody;
-
-  body.innerHTML = buildModalContent(product);
+    <h2 class="m-name">${p.name}</h2>
+    <div class="m-stars">${'★'.repeat(p.stars)}${'☆'.repeat(5-p.stars)}</div>
+    <p class="m-desc">${p.desc}</p>
+    ${badges ? `<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center">${badges}</div>` : ''}
+    <div class="m-div"></div>
+    ${priceHTML}
+    <a href="${WA(p.name)}" class="m-buy" target="_blank" rel="noopener">
+      💬 Comprar por WhatsApp
+    </a>`;
 
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
-
-  // Focus trap
-  setTimeout(() => DOM.modalClose.focus(), 100);
 }
 
 function closeModal() {
-  const modal = DOM.modal;
+  const modal = document.getElementById('modal');
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
 }
 
-function buildModalContent(product) {
-  const stars = '★'.repeat(product.stars) + '☆'.repeat(5 - product.stars);
-
-  // Price block
-  let priceHTML = '';
-  if (product.isMultiVariant) {
-    priceHTML = `
-      <div class="modal-variants">
-        ${product.variants.map(v => `
-          <div class="modal-variant-row">
-            <div>
-              <div class="modal-variant-type">${v.type}</div>
-              <div class="modal-variant-duration">${v.duration}</div>
-            </div>
-            <div class="modal-price-values">
-              <span class="modal-price-pen">S/ ${v.pricePEN}</span>
-              <span class="modal-price-usd">$${v.priceUSD}</span>
-            </div>
-          </div>
-        `).join('')}
-      </div>
-    `;
-  } else {
-    priceHTML = `
-      <div class="modal-price-block">
-        <span class="modal-price-label">${product.duration}</span>
-        <div class="modal-price-values">
-          <span class="modal-price-pen">S/ ${product.pricePEN}</span>
-          <span class="modal-price-usd">$${product.priceUSD}</span>
-        </div>
-      </div>
-    `;
-  }
-
-  // Badges
-  let badgesHTML = '';
-  if (product.warning) {
-    badgesHTML += `<span class="modal-badge warning">⚠️ ${product.warning}</span>`;
-  }
-  if (product.guarantee) {
-    badgesHTML += `<span class="modal-badge guarantee">🛡️ ${product.guarantee}</span>`;
-  }
-
-  return `
-    <div class="modal-logo">
-      <img
-        src="${product.image}"
-        alt="${product.name}"
-        onerror="this.outerHTML='<span class=\'modal-logo-fallback\'>${product.name[0]}</span>'"
-      >
-    </div>
-    <h2 class="modal-product-name" id="modalProductName">${product.name}</h2>
-    <div class="modal-stars" aria-label="${product.stars} estrellas">${stars}</div>
-    <p class="modal-description">${product.description}</p>
-    ${badgesHTML ? `<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center">${badgesHTML}</div>` : ''}
-    <div class="modal-divider"></div>
-    ${priceHTML}
-    <a
-      href="${waLink(product.name)}"
-      class="modal-buy-btn"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Comprar ${product.name} por WhatsApp"
-    >
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
-        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.862L.5 23.5l5.826-1.527A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.95 9.95 0 01-5.058-1.38L2.5 21.5l.917-4.283A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
-      </svg>
-      Comprar por WhatsApp
-    </a>
-  `;
-}
-
 function initModal() {
-  DOM.modalClose.addEventListener('click', closeModal);
-  DOM.modalBackdrop.addEventListener('click', closeModal);
-
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalBg').addEventListener('click', closeModal);
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && DOM.modal.classList.contains('open')) closeModal();
+    if (e.key === 'Escape') closeModal();
   });
 }
 
-
-/* ════════════════════════════════════════
-   INIT APP
-════════════════════════════════════════ */
+/* ── INIT ── */
 function initApp() {
-  initHeroCanvas();
-  initNavbar();
-  initScrollReveal();
+  initCanvas();
+  initNav();
+  initReveal();
   initCounters();
   initCarousel();
   initCatalog();
   initModal();
 }
 
-/* ════════════════════════════════════════
-   START
-════════════════════════════════════════ */
-document.addEventListener('DOMContentLoaded', () => {
-  initLoader();
-});
+document.addEventListener('DOMContentLoaded', initLoader);

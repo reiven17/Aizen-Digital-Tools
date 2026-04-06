@@ -5,19 +5,17 @@ Sube los archivos en la carpeta correspondiente respetando los nombres exactos i
 
 ---
 
-## 📁 `icons/`
+## 📁 `iconos/`
 
-Iconos de métodos de pago y redes sociales usados en la sección **Confianza** y el **Footer**.
+Iconos de redes sociales y navegador usados en el sitio.
 
 | Archivo            | Uso                          |
 |--------------------|------------------------------|
-| `binance.png`      | Chip de método de pago       |
-| `paypal.png`       | Chip de método de pago       |
-| `visa.png`         | Chip de método de pago       |
-| `yape.png`         | Chip de método de pago       |
 | `tiktok.png`       | Botón de red social (footer) |
 | `facebook.png`     | Botón de red social (footer) |
 | `whatsapp.png`     | Botón de red social (footer) |
+| `favicon-32.png`   | Favicon del navegador        |
+| `apple-touch-icon.png` | Acceso directo iOS      |
 
 **Tamaño recomendado:** 64 × 64 px o 128 × 128 px, fondo transparente (PNG).
 
@@ -25,33 +23,37 @@ Iconos de métodos de pago y redes sociales usados en la sección **Confianza** 
 
 ## 📁 `logos/`
 
-Logotipos de la marca usados en el loader, hero, navbar y footer.
+Logotipos de la marca usados en loader, hero, navbar y footer.
 
 | Archivo               | Uso                                              |
 |-----------------------|--------------------------------------------------|
-| `aizen-logo.png`      | Loader (pantalla de carga) y sección Hero        |
+| `logo-pantalla-carga.png` | Loader (pantalla de carga)                  |
+| `aizen-logo.png`      | Logo principal web (hero)                         |
 | `aizen-logo-sm.png`   | Navbar y Footer (versión compacta)               |
 | `og-image.png`        | Imagen Open Graph para redes sociales (meta tag) |
 
 **Tamaños recomendados:**
+- `logo-pantalla-carga.png` → ancho ~420 px, fondo transparente.
 - `aizen-logo.png` → ancho ~300 px, fondo transparente.
 - `aizen-logo-sm.png` → ancho ~120 px, fondo transparente.
 - `og-image.png` → **1200 × 630 px** (proporción 1.91:1, estándar Open Graph).
 
 ---
 
-## 📁 `favicon/`
+## 📁 `metodos-pago/`
 
-Íconos de la pestaña del navegador y acceso directo en dispositivos Apple.
+Métodos de pago usados en la sección **Confianza**.
 
 | Archivo                | Uso                                      |
 |------------------------|------------------------------------------|
-| `favicon-32.png`       | Favicon estándar del navegador (32×32 px)|
-| `apple-touch-icon.png` | Ícono de acceso directo iOS (180×180 px) |
+| `binance.png`      | Chip de método de pago       |
+| `paypal.png`       | Chip de método de pago       |
+| `visa.png`         | Chip de método de pago       |
+| `yape.png`         | Chip de método de pago       |
 
 ---
 
-## 📁 `products/`
+## 📁 `productos/`
 
 Imágenes de portada de cada producto del catálogo (usadas en tarjetas, carousel y modal).
 

@@ -1254,7 +1254,7 @@ footer {
 .car-btn:active,
 .car-dot:active,
 .car-dot:focus {
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 .fc:focus-visible,
@@ -1265,5 +1265,5 @@ footer {
 .car-dot:focus-visible {
   outline: 2px solid #b000ff;
   outline-offset: 2px;
-  box-shadow: 0 0 0 3px rgba(176,0,255,.25) !important;
+  box-shadow: 0 0 0 3px rgba(176,0,255,.25);
 }

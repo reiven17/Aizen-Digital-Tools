@@ -194,9 +194,48 @@ function initCanvas() {
   window.addEventListener('resize', () => { resize(); build(); }, { passive: true });
 }
 
-/* ── NAVBAR ── */
+/* ── SIDE MENU ── */
+function initSideMenu() {
+  const toggle  = document.getElementById('menuToggle');
+  const menu    = document.getElementById('sideMenu');
+  const overlay = document.getElementById('sideOverlay');
+  const close   = document.getElementById('sideClose');
+
+  function openMenu() {
+    menu.classList.add('open');
+    overlay.classList.add('open');
+    menu.setAttribute('aria-hidden', 'false');
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    close.focus();
+  }
+
+  function closeMenu() {
+    menu.classList.remove('open');
+    overlay.classList.remove('open');
+    menu.setAttribute('aria-hidden', 'true');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    toggle.focus();
+  }
+
+  toggle.addEventListener('click', openMenu);
+  close.addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+
+  menu.querySelectorAll('.side-nav a').forEach(a => {
+    a.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeMenu();
+  });
+}
+
+/* ── NAVBAR (scroll class, kept for compatibility) ── */
 function initNav() {
   const nav = document.getElementById('navbar');
+  if (!nav) return;
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 50);
   }, { passive: true });
@@ -566,6 +605,7 @@ function initApp() {
   initCarousel();
   initCatalog();
   initModal();
+  initSideMenu();
 }
 
 document.addEventListener('DOMContentLoaded', initLoader);

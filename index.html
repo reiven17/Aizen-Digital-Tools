@@ -36,8 +36,8 @@
 <!-- ===== APP ===== -->
 <div id="app">
 
-  <!-- NAV -->
-  <nav id="navbar">
+  <!-- NAV (hidden – replaced by hamburger menu) -->
+  <nav id="navbar" aria-hidden="true">
     <a href="#hero" class="nav-brand">
       <img src="assets/logos/aizen-logo.png" alt="Aizen">
     </a>
@@ -48,6 +48,32 @@
     </div>
     <a href="https://wa.me/51941797198" class="nav-wa" target="_blank" rel="noopener">Consultar</a>
   </nav>
+
+  <!-- HAMBURGER TOGGLE -->
+  <button id="menuToggle" class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <!-- SIDE MENU OVERLAY -->
+  <div id="sideOverlay" class="side-overlay"></div>
+
+  <!-- SIDE MENU PANEL -->
+  <aside id="sideMenu" class="side-menu" aria-hidden="true">
+    <button id="sideClose" class="side-close" aria-label="Cerrar menú">×</button>
+    <div class="side-menu-inner">
+      <nav class="side-nav">
+        <a href="#destacados">Destacados</a>
+        <a href="#productos">Productos</a>
+        <a href="#confianza">Garantía</a>
+        <a href="#comunidad">Comunidad</a>
+      </nav>
+      <a href="https://wa.me/51941797198" class="side-wa" target="_blank" rel="noopener">
+        Consultar por WhatsApp
+      </a>
+    </div>
+  </aside>
 
   <!-- HERO -->
   <section id="hero">

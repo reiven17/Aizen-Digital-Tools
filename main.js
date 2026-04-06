@@ -246,7 +246,7 @@ function initCarousel() {
   const dots  = document.getElementById('carDots');
   if (!track) return;
   // A small, fixed swipe distance advances exactly one card and avoids extreme jumps.
-  const SWIPE_DISTANCE_PX = 32;
+  const SWIPE_THRESHOLD_PX = 32;
 
   FEATURED.forEach((p, i) => track.appendChild(buildFC(p, i)));
 
@@ -302,7 +302,7 @@ function initCarousel() {
     isDown = false;
     vp.classList.remove('dragging');
     const delta = vp.scrollLeft - startScrollLeft;
-    if (Math.abs(delta) > SWIPE_DISTANCE_PX) {
+    if (Math.abs(delta) > SWIPE_THRESHOLD_PX) {
       goSlide(delta > 0 ? Math.min(carIdx + 1, FEATURED.length - 1) : Math.max(carIdx - 1, 0));
       resetAuto();
     } else {
@@ -362,7 +362,7 @@ function initCarousel() {
       return;
     }
     const dx = e.changedTouches[0].clientX - tx;
-    if (Math.abs(dx) > SWIPE_DISTANCE_PX) {
+    if (Math.abs(dx) > SWIPE_THRESHOLD_PX) {
       goSlide(dx < 0 ? Math.min(carIdx + 1, FEATURED.length - 1) : Math.max(carIdx - 1, 0));
       resetAuto();
     } else {

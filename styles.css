@@ -1252,8 +1252,7 @@ footer {
 .fc-cta:active,
 .pc-btn:active,
 .car-btn:active,
-.car-dot:active,
-.car-dot:focus {
+.car-dot:active {
   box-shadow: none;
 }
 

@@ -1248,23 +1248,22 @@ footer {
 }
 
 .fc:active,
-.fc:focus,
-.fc:focus-visible,
 .pc:active,
-.pc:focus,
-.pc:focus-visible,
 .fc-cta:active,
-.fc-cta:focus,
-.fc-cta:focus-visible,
 .pc-btn:active,
-.pc-btn:focus,
-.pc-btn:focus-visible,
 .car-btn:active,
-.car-btn:focus,
-.car-btn:focus-visible,
 .car-dot:active,
-.car-dot:focus,
-.car-dot:focus-visible {
-  outline: none;
+.car-dot:focus {
   box-shadow: none !important;
+}
+
+.fc:focus-visible,
+.pc:focus-visible,
+.fc-cta:focus-visible,
+.pc-btn:focus-visible,
+.car-btn:focus-visible,
+.car-dot:focus-visible {
+  outline: 2px solid #b000ff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(176,0,255,.25) !important;
 }

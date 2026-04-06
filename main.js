@@ -245,6 +245,7 @@ function initCarousel() {
   const track = document.getElementById('carouselTrack');
   const dots  = document.getElementById('carDots');
   if (!track) return;
+  // Un solo umbral controla el cambio de tarjeta para evitar saltos extremos.
   const SWIPE_THRESHOLD = 32;
 
   FEATURED.forEach((p, i) => track.appendChild(buildFC(p, i)));

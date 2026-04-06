@@ -84,7 +84,7 @@ function initLoader() {
     return;
   }
   const dur  = 1800;
-  const FAILSAFE_TIMEOUT_MS = 3200;
+  const FAILSAFE_TIMEOUT = 3200;
   const start = performance.now();
   let done = false;
 
@@ -97,7 +97,7 @@ function initLoader() {
     setTimeout(exitLoader, 200);
   }
 
-  const failSafe = setTimeout(finishLoader, FAILSAFE_TIMEOUT_MS);
+  const failSafe = setTimeout(finishLoader, FAILSAFE_TIMEOUT);
 
   function tick(now) {
     if (done) return;

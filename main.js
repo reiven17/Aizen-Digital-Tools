@@ -262,6 +262,8 @@ function initCarousel() {
   document.getElementById('carNext').addEventListener('click', () => { goSlide((carIdx+1)%FEATURED.length); resetAuto(); });
 
   let tx = 0;
+  let ty = 0;
+  let touchMode = null;
   let isDown = false;
   let startX = 0;
   let startScrollLeft = 0;
@@ -322,19 +324,38 @@ function initCarousel() {
   };
   vp.addEventListener('touchstart', e => {
     tx = e.touches[0].clientX;
+    ty = e.touches[0].clientY;
+    touchMode = null;
     beginDrag(tx);
   }, { passive:true });
   vp.addEventListener('touchmove', e => {
     if (!isDown) return;
     const x = e.touches[0].clientX;
+    const y = e.touches[0].clientY;
+    const dx = x - tx;
+    const dy = y - ty;
+    if (!touchMode && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
+      touchMode = Math.abs(dx) >= Math.abs(dy) ? 'x' : 'y';
+    }
+    if (touchMode === 'y') {
+      isDown = false;
+      vp.classList.remove('dragging');
+      return;
+    }
+    if (touchMode !== 'x') return;
+    e.preventDefault();
     const walk = x - startX;
     if (Math.abs(walk) > 3) moved = true;
     vp.scrollLeft = startScrollLeft - walk;
-  }, { passive:true });
+  }, { passive:false });
   vp.addEventListener('touchend', e => {
     if (!isDown) return;
     isDown = false;
     vp.classList.remove('dragging');
+    if (touchMode === 'y') {
+      touchMode = null;
+      return;
+    }
     const dx = e.changedTouches[0].clientX - tx;
     if (Math.abs(dx) > SWIPE_THRESHOLD) {
       goSlide(dx < 0 ? (carIdx+1)%FEATURED.length : (carIdx-1+FEATURED.length)%FEATURED.length);
@@ -342,6 +363,7 @@ function initCarousel() {
     } else {
       goSlide(carIdx);
     }
+    touchMode = null;
   }, { passive:true });
   vp.addEventListener('mousedown', e => {
     beginDrag(e.pageX - vp.offsetLeft);

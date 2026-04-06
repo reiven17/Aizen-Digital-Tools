@@ -264,7 +264,7 @@ function initCarousel() {
   let startX = 0;
   let startScrollLeft = 0;
   let moved = false;
-  let rafId = 0;
+  let isTicking = false;
   const vp = track.parentElement;
   const cards = Array.from(track.children);
   const dotEls = Array.from(dots.children);
@@ -290,9 +290,6 @@ function initCarousel() {
     if (!isDown) return;
     isDown = false;
     vp.classList.remove('dragging');
-    if (moved) {
-      setTimeout(() => { moved = false; }, 0);
-    }
   };
 
   const onMouseMove = e => {
@@ -305,10 +302,11 @@ function initCarousel() {
   };
 
   const onScroll = () => {
-    if (rafId) return;
-    rafId = requestAnimationFrame(() => {
+    if (isTicking) return;
+    isTicking = true;
+    requestAnimationFrame(() => {
       updateActiveByScroll();
-      rafId = 0;
+      isTicking = false;
     });
   };
   vp.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive:true });

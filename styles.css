@@ -169,18 +169,22 @@ nav { display: none; }
   justify-content: center;
   gap: 5px;
   background: rgba(0,0,0,.55);
-  border: 1.5px solid rgba(255,255,255,.55);
+  border: 1.5px solid rgba(255,255,255,.28);
   border-radius: 10px;
   padding: 0 12px;
   cursor: pointer;
-  transition: border-color .2s, box-shadow .2s, background .2s;
+  transition: border-color .2s, background .2s, opacity .2s, transform .2s;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
 .menu-toggle:hover {
-  border-color: rgba(255,255,255,.88);
-  box-shadow: 0 0 14px rgba(255,255,255,.18), 0 0 6px rgba(167,139,250,.35);
+  border-color: rgba(255,255,255,.5);
   background: rgba(10,6,22,.75);
+}
+.menu-open .menu-toggle {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(.92);
 }
 .menu-toggle span {
   display: block;
@@ -480,18 +484,18 @@ section { padding: 80px 20px; }
 }
 
 #productos .pc {
-  background: #100625;
-  border: 2px solid #b44ef8;
-  color: #e8e0ff;
+  background: #08050f;
+  border: 2px solid #6f2dbd;
+  color: #ffffff;
 }
 
 #productos .pc::before {
-  background: rgba(180,78,248,.03);
+  background: rgba(111,45,189,.04);
 }
 
 #productos .pc:hover {
-  border-color: #d946ef;
-  box-shadow: 0 8px 28px rgba(0,0,0,.45), 0 0 18px rgba(109,40,217,.35);
+  border-color: #8b3ad9;
+  box-shadow: 0 8px 28px rgba(0,0,0,.5), 0 0 14px rgba(79,20,140,.28);
 }
 
 #productos .pc-logo {
@@ -510,6 +514,7 @@ section { padding: 80px 20px; }
 #productos .pc-name {
   color: #ffffff;
   font-size: .78rem;
+  font-weight: 700;
 }
 
 #productos .pc-stars {

@@ -204,6 +204,7 @@ function initSideMenu() {
   function openMenu() {
     menu.classList.add('open');
     overlay.classList.add('open');
+    document.body.classList.add('menu-open');
     menu.setAttribute('aria-hidden', 'false');
     toggle.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
@@ -213,6 +214,7 @@ function initSideMenu() {
   function closeMenu() {
     menu.classList.remove('open');
     overlay.classList.remove('open');
+    document.body.classList.remove('menu-open');
     menu.setAttribute('aria-hidden', 'true');
     toggle.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';

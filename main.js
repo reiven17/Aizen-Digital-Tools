@@ -245,8 +245,8 @@ function initCarousel() {
   const track = document.getElementById('carouselTrack');
   const dots  = document.getElementById('carDots');
   if (!track) return;
-  // Un solo umbral controla el cambio de tarjeta para evitar saltos extremos.
-  const SWIPE_THRESHOLD = 32;
+  // A small, fixed swipe distance switches exactly one card and avoids extreme jumps.
+  const SWIPE_DISTANCE_PX = 32;
 
   FEATURED.forEach((p, i) => track.appendChild(buildFC(p, i)));
 
@@ -302,7 +302,7 @@ function initCarousel() {
     isDown = false;
     vp.classList.remove('dragging');
     const delta = vp.scrollLeft - startScrollLeft;
-    if (Math.abs(delta) > SWIPE_THRESHOLD) {
+    if (Math.abs(delta) > SWIPE_DISTANCE_PX) {
       goSlide(delta > 0 ? Math.min(carIdx + 1, FEATURED.length - 1) : Math.max(carIdx - 1, 0));
       resetAuto();
     } else {
@@ -362,7 +362,7 @@ function initCarousel() {
       return;
     }
     const dx = e.changedTouches[0].clientX - tx;
-    if (Math.abs(dx) > SWIPE_THRESHOLD) {
+    if (Math.abs(dx) > SWIPE_DISTANCE_PX) {
       goSlide(dx < 0 ? Math.min(carIdx + 1, FEATURED.length - 1) : Math.max(carIdx - 1, 0));
       resetAuto();
     } else {

@@ -34,14 +34,9 @@
 html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
-  background-image:
-    radial-gradient(150% 75% at 50% -8%, rgba(172,68,255,.36) 0%, rgba(80,0,120,.08) 38%, transparent 62%),
-    radial-gradient(140% 85% at 50% 112%, rgba(130,40,255,.26) 0%, transparent 62%),
-    repeating-radial-gradient(130% 82% at 20% 32%, rgba(188,98,255,.15) 0 3.5%, transparent 3.5% 12%),
-    repeating-radial-gradient(130% 82% at 82% 68%, rgba(124,46,255,.13) 0 3.8%, transparent 3.8% 12.5%),
-    linear-gradient(110deg, #000 0%, #040008 42%, #000 100%);
+  background-image: none;
   background-attachment: fixed;
-  background-size: 100% 100%, 100% 100%, 220% 160%, 220% 160%, 100% 100%;
+  background-size: 100% 100%;
   color: var(--w);
   font-family: var(--fb);
   font-weight: 400;
@@ -180,9 +175,9 @@ nav.scrolled {
   font-weight: 900;
   color: var(--pn);
   letter-spacing: .08em;
-  text-shadow: 0 0 10px rgba(180,78,248,.5);
+  text-shadow: none;
 }
-.nav-brand img { height: 30px; width: auto; filter: drop-shadow(0 0 8px rgba(180,78,248,.5)); }
+.nav-brand img { height: 30px; width: auto; filter: none; }
 .nav-links { display: flex; gap: 24px; }
 .nav-links a {
   font-size: .82rem;
@@ -248,7 +243,7 @@ nav.scrolled {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: radial-gradient(ellipse 65% 70% at 50% 50%, rgba(217,70,239,.08) 10%, transparent 28%, rgba(7,7,11,.62) 70%, var(--bg) 100%);
+  background: none;
 }
 #hero::after {
   content: '';
@@ -271,7 +266,7 @@ nav.scrolled {
   max-width: 680px;
   width: 100%;
 }
-.hero-logo { width: min(420px, 85vw); height: auto; filter: drop-shadow(0 0 40px rgba(180,78,248,.5)); }
+.hero-logo { width: min(420px, 85vw); height: auto; filter: none; }
 .hero-txt {
   display: flex;
   flex-direction: column;

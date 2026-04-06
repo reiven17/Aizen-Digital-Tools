@@ -37,8 +37,8 @@ body {
   background-image:
     radial-gradient(150% 75% at 50% -8%, rgba(172,68,255,.36) 0%, rgba(80,0,120,.08) 38%, transparent 62%),
     radial-gradient(140% 85% at 50% 112%, rgba(130,40,255,.26) 0%, transparent 62%),
-    repeating-radial-gradient(130% 82% at 20% 32%, rgba(188,98,255,.15) 0 2.2%, transparent 2.2% 8.8%),
-    repeating-radial-gradient(130% 82% at 82% 68%, rgba(124,46,255,.13) 0 2.4%, transparent 2.4% 9.2%),
+    repeating-radial-gradient(130% 82% at 20% 32%, rgba(188,98,255,.15) 0 3.5%, transparent 3.5% 12%),
+    repeating-radial-gradient(130% 82% at 82% 68%, rgba(124,46,255,.13) 0 3.8%, transparent 3.8% 12.5%),
     linear-gradient(110deg, #000 0%, #040008 42%, #000 100%);
   background-attachment: fixed;
   background-size: 100% 100%, 100% 100%, 220% 160%, 220% 160%, 100% 100%;

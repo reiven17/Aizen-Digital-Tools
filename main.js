@@ -260,12 +260,64 @@ function initCarousel() {
   document.getElementById('carNext').addEventListener('click', () => { goSlide((carIdx+1)%FEATURED.length); resetAuto(); });
 
   let tx = 0;
+  let isDown = false;
+  let startX = 0;
+  let startScrollLeft = 0;
+  let moved = false;
   const vp = track.parentElement;
   vp.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive:true });
   vp.addEventListener('touchend', e => {
     const dx = e.changedTouches[0].clientX - tx;
     if (Math.abs(dx) > 50) { goSlide(dx<0 ? (carIdx+1)%FEATURED.length : (carIdx-1+FEATURED.length)%FEATURED.length); resetAuto(); }
   }, { passive:true });
+  vp.addEventListener('mousedown', e => {
+    isDown = true;
+    moved = false;
+    vp.classList.add('dragging');
+    startX = e.pageX - vp.offsetLeft;
+    startScrollLeft = vp.scrollLeft;
+  });
+  window.addEventListener('mouseup', () => {
+    isDown = false;
+    vp.classList.remove('dragging');
+  });
+  vp.addEventListener('mouseleave', () => {
+    isDown = false;
+    vp.classList.remove('dragging');
+  });
+  vp.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - vp.offsetLeft;
+    const walk = x - startX;
+    if (Math.abs(walk) > 2) moved = true;
+    vp.scrollLeft = startScrollLeft - walk;
+  });
+  vp.addEventListener('scroll', () => {
+    const cards = Array.from(document.querySelectorAll('.fc'));
+    if (!cards.length) return;
+    const center = vp.scrollLeft + vp.offsetWidth / 2;
+    let nearest = 0;
+    let best = Infinity;
+    cards.forEach((c, idx) => {
+      const cCenter = c.offsetLeft + c.offsetWidth / 2;
+      const dist = Math.abs(cCenter - center);
+      if (dist < best) { best = dist; nearest = idx; }
+    });
+    if (nearest !== carIdx) {
+      carIdx = nearest;
+      document.querySelectorAll('.fc').forEach((c, j) => c.classList.toggle('active', j===carIdx));
+      document.querySelectorAll('.car-dot').forEach((d, j) => d.classList.toggle('active', j===carIdx));
+    }
+  }, { passive: true });
+
+  track.addEventListener('click', e => {
+    if (moved) {
+      e.preventDefault();
+      e.stopPropagation();
+      moved = false;
+    }
+  }, true);
 
   startAuto();
 }
@@ -287,24 +339,13 @@ function resetAuto()  { clearInterval(carTimer); startAuto(); }
 function buildFC(p, i) {
   const el = document.createElement('div');
   el.className = 'fc' + (i===0 ? ' active' : '');
-  const dp  = p.multi ? `Desde S/ ${p.variants[0].pen}` : `S/ ${p.pen}`;
-  const du  = p.multi ? `Desde $${p.variants[0].usd}`  : `$${p.usd}`;
-  const dr  = p.multi ? p.variants[0].dur : p.dur;
   el.innerHTML = `
-    ${p.tag ? `<span class="fc-tag">${p.tag}</span>` : ''}
     <div class="fc-logo">
       <img src="${p.img}" alt="${p.name}" onerror="this.outerHTML='<span class=\\'fc-logo-fb\\'>${p.name[0]}</span>'">
     </div>
     <div class="fc-name">${p.name}</div>
     <div class="fc-stars">${'★'.repeat(p.stars)}${'☆'.repeat(5-p.stars)}</div>
     <p class="fc-desc">${p.desc.substring(0,90)}…</p>
-    <div class="fc-price-row">
-      <span class="fc-dur">${dr}</span>
-      <div class="fc-prices">
-        <span class="fc-pen">${dp}</span>
-        <span class="fc-usd">${du}</span>
-      </div>
-    </div>
     <button class="fc-cta">Ver Detalles</button>`;
   el.addEventListener('click', () => openModal(p));
   return el;
@@ -365,17 +406,12 @@ function render() {
       const c = document.createElement('div');
       c.className = 'pc';
       c.style.animationDelay = (i * .05) + 's';
-      const dp = p.multi ? `Desde S/ ${p.variants[0].pen}` : `S/ ${p.pen}`;
-      const dr = p.multi ? p.variants[0].dur : p.dur;
       c.innerHTML = `
-        ${p.tag ? `<span class="pc-tag">${p.tag}</span>` : ''}
         <div class="pc-logo">
           <img src="${p.img}" alt="${p.name}" onerror="this.outerHTML='<span class=\\'pc-logo-fb\\'>${p.name[0]}</span>'">
         </div>
         <div class="pc-name">${p.name}</div>
         <div class="pc-stars">${'★'.repeat(p.stars)}${'☆'.repeat(5-p.stars)}</div>
-        <div class="pc-dur">${dr}</div>
-        <div class="pc-price">${dp}</div>
         <button class="pc-btn">Ver Detalles</button>`;
       c.addEventListener('click', () => openModal(p));
       grid.appendChild(c);

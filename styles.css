@@ -428,7 +428,6 @@ section { padding: 80px 20px; }
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
-  will-change: scroll-position;
 }
 .carousel-vp::-webkit-scrollbar { display: none; }
 .carousel-track {

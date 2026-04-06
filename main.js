@@ -264,7 +264,49 @@ function initCarousel() {
   let startX = 0;
   let startScrollLeft = 0;
   let moved = false;
+  let rafId = 0;
   const vp = track.parentElement;
+  const cards = Array.from(track.children);
+  const dotEls = Array.from(dots.children);
+
+  const updateActiveByScroll = () => {
+    if (!cards.length) return;
+    const center = vp.scrollLeft + vp.offsetWidth / 2;
+    let nearest = 0;
+    let best = Infinity;
+    cards.forEach((c, idx) => {
+      const cCenter = c.offsetLeft + c.offsetWidth / 2;
+      const dist = Math.abs(cCenter - center);
+      if (dist < best) { best = dist; nearest = idx; }
+    });
+    if (nearest !== carIdx) {
+      carIdx = nearest;
+      cards.forEach((c, j) => c.classList.toggle('active', j===carIdx));
+      dotEls.forEach((d, j) => d.classList.toggle('active', j===carIdx));
+    }
+  };
+
+  const onMouseUp = () => {
+    isDown = false;
+    vp.classList.remove('dragging');
+  };
+
+  const onMouseMove = e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - vp.offsetLeft;
+    const walk = x - startX;
+    if (Math.abs(walk) > 2) moved = true;
+    vp.scrollLeft = startScrollLeft - walk;
+  };
+
+  const onScroll = () => {
+    if (rafId) return;
+    rafId = requestAnimationFrame(() => {
+      updateActiveByScroll();
+      rafId = 0;
+    });
+  };
   vp.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive:true });
   vp.addEventListener('touchend', e => {
     const dx = e.changedTouches[0].clientX - tx;
@@ -277,39 +319,13 @@ function initCarousel() {
     startX = e.pageX - vp.offsetLeft;
     startScrollLeft = vp.scrollLeft;
   });
-  window.addEventListener('mouseup', () => {
-    isDown = false;
-    vp.classList.remove('dragging');
-  });
+  window.addEventListener('mouseup', onMouseUp);
   vp.addEventListener('mouseleave', () => {
     isDown = false;
     vp.classList.remove('dragging');
   });
-  vp.addEventListener('mousemove', e => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - vp.offsetLeft;
-    const walk = x - startX;
-    if (Math.abs(walk) > 2) moved = true;
-    vp.scrollLeft = startScrollLeft - walk;
-  });
-  vp.addEventListener('scroll', () => {
-    const cards = Array.from(document.querySelectorAll('.fc'));
-    if (!cards.length) return;
-    const center = vp.scrollLeft + vp.offsetWidth / 2;
-    let nearest = 0;
-    let best = Infinity;
-    cards.forEach((c, idx) => {
-      const cCenter = c.offsetLeft + c.offsetWidth / 2;
-      const dist = Math.abs(cCenter - center);
-      if (dist < best) { best = dist; nearest = idx; }
-    });
-    if (nearest !== carIdx) {
-      carIdx = nearest;
-      document.querySelectorAll('.fc').forEach((c, j) => c.classList.toggle('active', j===carIdx));
-      document.querySelectorAll('.car-dot').forEach((d, j) => d.classList.toggle('active', j===carIdx));
-    }
-  }, { passive: true });
+  vp.addEventListener('mousemove', onMouseMove);
+  vp.addEventListener('scroll', onScroll, { passive: true });
 
   track.addEventListener('click', e => {
     if (moved) {
@@ -318,6 +334,12 @@ function initCarousel() {
       moved = false;
     }
   }, true);
+
+  window.addEventListener('beforeunload', () => {
+    window.removeEventListener('mouseup', onMouseUp);
+    vp.removeEventListener('mousemove', onMouseMove);
+    vp.removeEventListener('scroll', onScroll);
+  }, { once: true });
 
   startAuto();
 }

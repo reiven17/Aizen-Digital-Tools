@@ -245,6 +245,8 @@ function initCarousel() {
   const track = document.getElementById('carouselTrack');
   const dots  = document.getElementById('carDots');
   if (!track) return;
+  const SNAP_THRESHOLD = 35;
+  const SWIPE_THRESHOLD = 35;
 
   FEATURED.forEach((p, i) => track.appendChild(buildFC(p, i)));
 
@@ -260,9 +262,6 @@ function initCarousel() {
   document.getElementById('carNext').addEventListener('click', () => { goSlide((carIdx+1)%FEATURED.length); resetAuto(); });
 
   let tx = 0;
-  let touchDragging = false;
-  let touchStartX = 0;
-  let touchStartScrollLeft = 0;
   let isDown = false;
   let startX = 0;
   let startScrollLeft = 0;
@@ -271,6 +270,13 @@ function initCarousel() {
   const vp = track.parentElement;
   const cards = Array.from(track.children);
   const dotEls = Array.from(dots.children);
+  const beginDrag = x => {
+    isDown = true;
+    startX = x;
+    startScrollLeft = vp.scrollLeft;
+    moved = false;
+    vp.classList.add('dragging');
+  };
 
   const updateActiveByScroll = () => {
     if (!cards.length) return;
@@ -293,7 +299,8 @@ function initCarousel() {
     if (!isDown) return;
     isDown = false;
     vp.classList.remove('dragging');
-    goSlide(carIdx);
+    const dragDist = Math.abs(vp.scrollLeft - startScrollLeft);
+    if (dragDist <= SNAP_THRESHOLD) goSlide(carIdx);
   };
 
   const onMouseMove = e => {
@@ -315,25 +322,21 @@ function initCarousel() {
   };
   vp.addEventListener('touchstart', e => {
     tx = e.touches[0].clientX;
-    touchDragging = true;
-    touchStartX = tx;
-    touchStartScrollLeft = vp.scrollLeft;
-    moved = false;
-    vp.classList.add('dragging');
+    beginDrag(tx);
   }, { passive:true });
   vp.addEventListener('touchmove', e => {
-    if (!touchDragging) return;
+    if (!isDown) return;
     const x = e.touches[0].clientX;
-    const walk = x - touchStartX;
+    const walk = x - startX;
     if (Math.abs(walk) > 3) moved = true;
-    vp.scrollLeft = touchStartScrollLeft - walk;
+    vp.scrollLeft = startScrollLeft - walk;
   }, { passive:true });
   vp.addEventListener('touchend', e => {
-    if (!touchDragging) return;
-    touchDragging = false;
+    if (!isDown) return;
+    isDown = false;
     vp.classList.remove('dragging');
     const dx = e.changedTouches[0].clientX - tx;
-    if (Math.abs(dx) > 35) {
+    if (Math.abs(dx) > SWIPE_THRESHOLD) {
       goSlide(dx < 0 ? (carIdx+1)%FEATURED.length : (carIdx-1+FEATURED.length)%FEATURED.length);
       resetAuto();
     } else {
@@ -341,11 +344,7 @@ function initCarousel() {
     }
   }, { passive:true });
   vp.addEventListener('mousedown', e => {
-    isDown = true;
-    moved = false;
-    vp.classList.add('dragging');
-    startX = e.pageX - vp.offsetLeft;
-    startScrollLeft = vp.scrollLeft;
+    beginDrag(e.pageX - vp.offsetLeft);
   });
   window.addEventListener('mouseup', onMouseUp);
   vp.addEventListener('mouseleave', () => {

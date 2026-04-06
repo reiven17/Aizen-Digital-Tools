@@ -1084,10 +1084,11 @@ section { padding: 80px 20px; }
 }
 .com-eye {
   font-family: var(--fd);
-  font-size: .8rem;
+  font-size: .92rem;
   letter-spacing: .22em;
   text-transform: uppercase;
-  color: var(--p3);
+  color: #f5edff;
+  text-shadow: 0 0 10px rgba(217,70,239,.35);
 }
 .com-title {
   font-family: var(--fd);

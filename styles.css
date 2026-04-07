@@ -1376,8 +1376,9 @@ footer {
 @media (max-width: 639px) {
   .ld-bar-wrap { transform: translateY(-56px); }
   .hero-inner {
-    transform: translateY(-28px);
-    padding-top: 78px;
+    transform: translateY(-64px);
+    padding-top: 52px;
+    padding-bottom: 52px;
   }
   .guar-row { grid-template-columns: 1fr; }
   .stat-sep { display: none; }

@@ -151,7 +151,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible {
 }
 
 /* ── APP ── */
-#app { opacity: 1; }
+#app { opacity: 0; }
 #app.show { opacity: 1; }
 
 /* ── NAV (hidden) ── */

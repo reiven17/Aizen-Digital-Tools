@@ -75,11 +75,11 @@ const PRODUCTS = [
 
 const FEATURED = PRODUCTS.filter(p => p.feat);
 
-/* ── LOADER (1.8 segundos) ── */
+/* ── LOADER ── */
 function initLoader() {
   const fill = document.getElementById('loaderFill');
   const pct  = document.getElementById('loaderPct');
-  const dur  = 1800;
+  const dur  = 1200;
   const start = performance.now();
 
   function tick(now) {
@@ -105,7 +105,7 @@ function exitLoader() {
   const app    = document.getElementById('app');
   loader.classList.add('exit');
   app.classList.add('show');
-  setTimeout(() => { loader.style.display = 'none'; }, 800);
+  loader.style.display = 'none';
   initApp();
 }
 

@@ -199,7 +199,6 @@ function initSideMenu() {
   const toggle  = document.getElementById('menuToggle');
   const menu    = document.getElementById('sideMenu');
   const overlay = document.getElementById('sideOverlay');
-  const close   = document.getElementById('sideClose');
 
   function openMenu() {
     menu.classList.add('open');
@@ -208,7 +207,6 @@ function initSideMenu() {
     menu.setAttribute('aria-hidden', 'false');
     toggle.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
-    close.focus();
   }
 
   function closeMenu() {
@@ -228,7 +226,6 @@ function initSideMenu() {
       openMenu();
     }
   });
-  close.addEventListener('click', closeMenu);
   overlay.addEventListener('click', closeMenu);
 
   menu.querySelectorAll('.side-nav a').forEach(a => {

@@ -15,6 +15,7 @@
 <meta property="og:image" content="https://aizenai.tech/assets/logos/og-image.png">
 <link rel="icon" href="assets/iconos/favicon-32.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/iconos/apple-touch-icon.png">
+<link rel="preload" as="image" href="assets/logos/aizen-logo.png" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -25,7 +26,7 @@
 <!-- ===== LOADER ===== -->
 <div id="loader">
   <div class="ld-logo">
-    <img src="assets/logos/aizen-logo.png" alt="Aizen Digital Tools">
+    <img src="assets/logos/aizen-logo.png" alt="Aizen Digital Tools" loading="eager" fetchpriority="high" decoding="sync">
   </div>
   <div class="ld-bar-wrap">
     <div class="ld-bar"><div class="ld-fill" id="loaderFill"></div></div>
@@ -75,19 +76,19 @@
   <section id="hero">
     <canvas id="heroCanvas"></canvas>
     <div class="hero-inner">
-      <div class="hero-logo-wrap" data-reveal>
+      <div class="hero-logo-wrap">
         <img src="assets/logos/aizen-logo.png" alt="Aizen Digital Tools" class="hero-logo">
       </div>
-      <p class="hero-tag" data-reveal>
+      <p class="hero-tag">
         Herramientas digitales premium.<br>
         <em>Sin complicaciones. Al mejor precio.</em>
       </p>
-      <div class="hero-badges" data-reveal>
+      <div class="hero-badges">
         <span class="badge">✦ +50 Clientes</span>
         <span class="badge">✦ Garantía Real</span>
         <span class="badge">✦ Entrega Inmediata</span>
       </div>
-      <div class="hero-cta" data-reveal>
+      <div class="hero-cta">
         <a href="#productos" class="btn-primary">Ver Productos →</a>
         <a href="https://wa.me/51941797198" class="btn-wa" target="_blank" rel="noopener">Consultar ahora</a>
       </div>

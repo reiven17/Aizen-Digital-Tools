@@ -73,11 +73,8 @@ input:focus-visible, textarea:focus-visible, select:focus-visible {
   justify-content: center;
   flex-direction: column;
   gap: 52px;
-  transition: opacity .7s ease, transform .7s var(--es);
 }
 #loader.exit {
-  opacity: 0;
-  transform: translateY(-12px);
   pointer-events: none;
 }
 .ld-logo {
@@ -154,7 +151,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible {
 }
 
 /* ── APP ── */
-#app { opacity: 0; transition: opacity .6s ease; }
+#app { opacity: 1; }
 #app.show { opacity: 1; }
 
 /* ── NAV (hidden) ── */

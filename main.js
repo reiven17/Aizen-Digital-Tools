@@ -613,19 +613,24 @@ function initApp() {
   initSideMenu();
 }
 
-function forceStartAtHero() {
+function forceStartAtHero({ clearHash = true } = {}) {
   const supportsScrollRestoration = 'scrollRestoration' in history;
   if (supportsScrollRestoration) history.scrollRestoration = 'manual';
-  if (window.location.hash) {
+  if (clearHash && window.location.hash) {
     history.replaceState(null, '', window.location.pathname + window.location.search);
   }
-  window.scrollTo(0, 0);
-  if (supportsScrollRestoration) {
-    setTimeout(() => { history.scrollRestoration = 'auto'; }, 0);
-  }
+  window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   forceStartAtHero();
   initLoader();
+});
+
+window.addEventListener('load', () => {
+  forceStartAtHero({ clearHash: false });
+});
+
+window.addEventListener('pageshow', () => {
+  forceStartAtHero({ clearHash: false });
 });

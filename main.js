@@ -613,4 +613,19 @@ function initApp() {
   initSideMenu();
 }
 
-document.addEventListener('DOMContentLoaded', initLoader);
+function forceStartAtHero() {
+  const supportsScrollRestoration = 'scrollRestoration' in history;
+  if (supportsScrollRestoration) history.scrollRestoration = 'manual';
+  if (window.location.hash) {
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  }
+  window.scrollTo(0, 0);
+  if (supportsScrollRestoration) {
+    setTimeout(() => { history.scrollRestoration = 'auto'; }, 0);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  forceStartAtHero();
+  initLoader();
+});

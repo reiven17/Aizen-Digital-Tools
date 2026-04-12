@@ -136,8 +136,6 @@ input:focus-visible, textarea:focus-visible, select:focus-visible {
   width: 0%;
   border-radius: 99px;
   background: linear-gradient(90deg, #6a00ff, #9a00ff, #c300ff);
-  background-size: 300% 100%;
-  animation: shimBar 1.5s linear infinite;
   box-shadow: 0 0 14px rgba(154,0,255,.95), 0 0 30px rgba(106,0,255,.85);
   transition: width .04s linear;
 }

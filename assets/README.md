@@ -23,7 +23,7 @@ Iconos de redes sociales y navegador usados en el sitio.
 
 ## 📁 `logos/`
 
-Logotipos de la marca usados en loader, hero, navbar y footer.
+Logotipos de la marca y logos de métodos de pago.
 
 | Archivo               | Uso                                              |
 |-----------------------|--------------------------------------------------|
@@ -31,6 +31,10 @@ Logotipos de la marca usados en loader, hero, navbar y footer.
 | `aizen-logo.png`      | Logo principal web (hero)                         |
 | `aizen-logo-sm.png`   | Navbar y Footer (versión compacta)               |
 | `og-image.png`        | Imagen Open Graph para redes sociales (meta tag) |
+| `binance.png`         | Método de pago (chip)                             |
+| `paypal.png`          | Método de pago (chip)                             |
+| `visa.png`            | Método de pago (chip)                             |
+| `yape.png`            | Método de pago (chip)                             |
 
 **Tamaños recomendados:**
 - `logo-pantalla-carga.png` → ancho ~420 px, fondo transparente.
@@ -40,16 +44,10 @@ Logotipos de la marca usados en loader, hero, navbar y footer.
 
 ---
 
-## 📁 `metodos-pago/`
+## 📁 `metodos-pago/` (legado)
 
-Métodos de pago usados en la sección **Confianza**.
-
-| Archivo                | Uso                                      |
-|------------------------|------------------------------------------|
-| `binance.png`      | Chip de método de pago       |
-| `paypal.png`       | Chip de método de pago       |
-| `visa.png`         | Chip de método de pago       |
-| `yape.png`         | Chip de método de pago       |
+Carpeta anterior mantenida solo por compatibilidad histórica.  
+Las rutas activas del sitio para métodos de pago están en `assets/logos/`.
 
 ---
 
